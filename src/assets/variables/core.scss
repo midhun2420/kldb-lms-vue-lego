@@ -1,0 +1,298 @@
+:root {
+    /* Spacers */
+    --spacer:                           1rem;
+    @each $name, $value in $spacers {
+        --spacer-#{$name}: #{$value};
+    }
+
+    @each $name, $value in $size-variations {
+        --#{$name}-factor: #{$value};
+    }
+
+    /* Border Radius */
+    --border-radius:                    .375rem;
+    --border-radius-xl:                 .5rem;
+    --border-radius-lg:                 .4375rem;
+    --border-radius-sm:                 .25rem;
+    --border-radius-pill:               50rem;
+
+
+    /* Core - Base Variables */
+    --body-bg-color:                    var(--color-white);
+    --body-bg-accent:                   var(--color-gray-100);
+    --body-text-color:                  var(--color-gray-900);
+
+    --element-separator:                var(--spacer-2);
+    --form-separator:                   var(--spacer-3);
+
+    --container-separator:              var(--spacer-5);
+    --container-paddding:               var(--spacer-3);
+    --container-border-radius:          var(--border-radius-xl);
+
+    --full-height:                      100vh;
+    --half-height:                      calc(var(--full-height) / 2);
+    --one-third-height:                 calc(var(--full-height) / 3);
+    --quarter-height:                   calc(var(--full-height) / 4);
+
+    /* Borders */
+    --border-width:                     1px;
+    --border-color:                     var(--color-gray-400);
+
+
+    // Type
+    --font-family-sans-serif:           apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace:            SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family-base:                 var(--font-family-sans-serif);
+
+
+    --font-size-base:                   1rem; // Assumes the browser default, typically `16px`
+    --font-size-lg:                     calc(var(--font-size-base) * var(--lg-factor));
+    --font-size-sm:                     calc(var(--font-size-base) * var(--sm-factor));
+
+
+    --font-weight-lighter:              lighter;
+    --font-weight-light:                300;
+    --font-weight-normal:               400;
+    --font-weight-bold:                 700;
+    --font-weight-bolder:               bolder;
+
+    --font-weight-base:                 var(--font-weight-normal);
+    --line-height-base:                 1.5;
+
+
+    --h1-font-size:                     calc(var(--font-size-base) * 2.5);
+    --h2-font-size:                     calc(var(--font-size-base) * 2);
+    --h3-font-size:                     calc(var(--font-size-base) * 1.75);
+    --h4-font-size:                     calc(var(--font-size-base) * 1.5);
+    --h5-font-size:                     calc(var(--font-size-base) * 1.25);
+    --h6-font-size:                     var(--font-size-base);
+
+
+    --headings-margin-bottom:           calc(var(--spacer) / 2);
+    --headings-font-family:             inherit;
+    --headings-font-weight:             500;
+    --headings-line-height:             1.2;
+    --headings-color:                   inherit;
+
+    --display1-size:                    6rem;
+    --display2-size:                    5.5rem;
+    --display3-size:                    4.5rem;
+    --display4-size:                    3.5rem;
+
+    --display1-weight:                  300;
+    --display2-weight:                  300;
+    --display3-weight:                  300;
+    --display4-weight:                  300;
+    --display-line-height:              var(--headings-line-height);
+
+    --lead-font-size:                   calc(var(--font-size-base) * 1.25);
+    --lead-font-weight:                 300;
+
+    --small-font-size:                  80%;
+
+    --text-muted:                       var(--color-gray-600);
+
+    --blockquote-small-color:           var(--color-gray-600);
+    --blockquote-small-font-size:       var(--small-font-size);
+    --blockquote-font-size:             calc(var(--font-size-base) * 1.25);
+
+    --hr-border-color:                  var(--color-black-10);
+    --hr-border-width:                  var(--border-width);
+
+    --mark-padding:                     .2em;
+
+    --dt-font-weight:                   var(--font-weight-bold);
+
+    --kbd-box-shadow:                   inset 0 -.1rem 0 var(--color-black-30);
+    --nested-kbd-font-weight:           var(--font-weight-bold);
+
+    --list-inline-padding:              .5rem;
+
+    --mark-bg:                          #fcf8e3;
+
+    --hr-margin-y:                      var(--spacer);
+
+
+    // Links
+    //
+    // Style anchor elements.
+
+    //noinspection SassScssResolvedByNameOnly
+    --link-color:                       var(--color-primary);
+    --link-decoration:                  none;
+    --link-hover-color:                 var(--color-primary-600);
+    --link-hover-decoration:            underline;
+
+    // Paragraphs
+    //
+    // Style p element.
+    --paragraph-margin-bottom:          1rem;
+
+    /* Element Base */
+    --element-padding-x:                0.75rem;
+    --element-padding-y:                0.625rem;
+
+    --element-line-height:              1.6rem;
+
+    --element-font-size:                var(--font-size-base);
+    --element-border-width:             var(--border-width);
+
+    --element-border-color:             var(--border-color);
+    --element-border-color-focus:       var(--color-primary);
+    --element-height:                   calc(var(--element-line-height) + ((var(--element-padding-y) + var(--element-border-width)) * 2));
+
+    /* Form Control */
+    --form-control-base-padding-x:      var(--element-padding-x);
+    --form-control-base-padding-y:      var(--element-padding-y);
+
+    --form-control-base-line-height:    var(--element-line-height);
+    --form-control-base-font-size:      var(--element-font-size);
+    --form-control-base-height:         var(--element-height);
+
+
+    --form-control-padding-x:           var(--element-padding-x);
+    --form-control-padding-y:           var(--element-padding-y);
+
+    --form-control-line-height:         var(--element-line-height);
+    --form-control-font-size:           var(--element-font-size);
+
+    --form-control-border-width:        var(--element-border-width);
+
+    --form-control-border-color:        var(--element-border-color);
+    --form-control-border-color-focus:  var(--element-border-color-focus);
+    --form-control-height:              var(--element-height);
+
+    --form-control-shadow-color:        var(--color-primary-60);
+    --form-control-shadow-color-focus:  var(--form-control-border-color-focus);
+
+
+    /* Buttons */
+    --btn-base-padding-x:               var(--element-padding-x);
+    --btn-base-padding-y:               var(--element-padding-y);
+    --btn-base-font-size:               var(--element-font-size);
+    --btn-base-font-weight:             400;
+    --btn-base-height:                  var(--element-height);
+
+
+    --btn-padding-x:                    var(--element-padding-x);
+    --btn-padding-y:                    var(--btn-base-padding-y);
+    --btn-font-size:                    var(--element-font-size);
+    --btn-font-weight:                  400;
+    --btn-height:                       var(--element-height);
+
+    /* Dropdowns */
+    --dropdown-bg:                      var(--color-white);
+    --dropdown-border-width:            0;
+    --dropdown-border-color:            var(--color-black-20);
+    --dropdown-border-radius:           var(--border-radius-lg);
+
+    --dropdown-link-color:              var(--color-gray-900);
+    --dropdown-link-bg:                 var(--dropdown-bg);
+
+    --dropdown-link-hover-color:        var(--color-gray-800);
+    --dropdown-link-hover-bg:           var(--color-gray-200);
+
+    --dropdown-link-active-color:       var(--color-gray-800);
+    --dropdown-link-active-bg:          var(--color-gray-300);
+
+    --dropdown-item-padding-y:          0.5rem;
+    --dropdown-item-padding-x:          1rem;
+
+    --dropdown-link-disabled-color:     var(--color-gray-600);
+
+
+    /* Dropdown Buttons */
+    --drop-down-width:                  20rem;
+
+
+    /*
+        Pagination
+    */
+    // Pagination
+
+    --pagination-padding-y:             .5rem;
+    --pagination-padding-x:             .75rem;
+    --pagination-padding-y-sm:          .25rem;
+    --pagination-padding-x-sm:          .5rem;
+    --pagination-padding-y-lg:          .75rem;
+    --pagination-padding-x-lg:          1.5rem;
+    --pagination-line-height:           1.25;
+
+    --pagination-color:                 var(--link-color);
+    --pagination-bg:                    var(--body-bg-color);
+    --pagination-border-width:          var(--border-width);
+    --pagination-border-color:          var(--color-gray-300);
+
+    --pagination-focus-outline:         0;
+
+    --pagination-hover-color:           var(--link-hover-color);
+    --pagination-hover-bg:              var(--color-gray-300);
+    --pagination-hover-border-color:    var(--color-gray-300);
+
+    // CHECK: Need to standardized
+    --pagination-active-color:          var(--color-white);
+    --pagination-active-bg:             var(--color-primary);
+    --pagination-active-border-color:   var(--color-primary);
+
+    --pagination-disabled-color:        var(--color-gray-600);
+    --pagination-disabled-bg:           var(--color-white);
+    --pagination-disabled-border-color: var(--color-gray-300);
+
+
+    // Tables
+    --table-margin-bottom:              var(--container-separator);
+    --table-cell-padding:               1rem;
+    --table-cell-padding-sm:            0.5rem;
+
+    --table-bg:                         transparent;
+    --table-accent-bg:                  var(--body-bg-accent);
+    --table-hover-color:                var(--body-text-color);
+    --table-hover-bg:                   var(--body-bg-accent);
+    --table-active-bg:                  var(--table-hover-bg);
+
+    --table-border-width:               var(--border-width);
+    --table-border-color:               var(--color-gray-400);
+
+    --table-head-spacer-y:              var(--spacer-3);
+    --table-head-spacer-x:              var(--spacer-3);
+    --table-head-font-size:             .65rem;
+    --table-head-font-weight:           bold;
+    --table-head-text-transform:        uppercase;
+    --table-head-letter-spacing:        1px;
+
+    --table-head-bg:                    var(--color-gray-100);
+    --table-head-color:                 var(--color-gray-600);
+    --table-action-color:               var(--color-gray-500);
+
+    // Navbar
+    --nav-bar-bg:                       var(--color-white);
+    --nav-bar-logo-text-color:          var(--color-primary);
+    --nav-bar-text-color:               var(--color-gray-900);
+    --nav-bar-hover-text-color:         var(--color-primary);
+
+    --nav-bar-height:                   3.8rem;
+    --nav-bar-drop-down-width:          16rem;
+    --nav-bar-animation-duration:       300ms;
+
+
+    --nav-bar-logo-font-size:           1.5rem;
+
+    --nav-bar-item-font-size:           var(--font-size-base);
+    --nav-bar-item-line-height:         var(--line-height-base);
+    --nav-bar-item-padding-y:           0.75rem;
+    --nav-bar-item-padding-x:           var(--spacer);
+
+    --nav-bar-hover-effect-color:       var(--nav-bar-hover-text-color);
+
+    // Cards
+    --card-padding:                     var(--container-paddding);
+    --card-radius:                      var(--container-border-radius);
+
+
+    // Tabs
+    --tabs-selected-color:              var(--color-primary);
+    --tabs-border-color:                var(--border-color);
+    --tabs-selected-text-color:         var(--color-white);
+
+}
+

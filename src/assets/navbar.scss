@@ -1,0 +1,72 @@
+
+.nav-container {
+  position: fixed;
+  width: 100%;
+  //background-color: var(--color-primary);
+  z-index: 999 !important;
+}
+
+.nav-bar {
+  margin: 0 auto;
+  letter-spacing: 2px;
+  //background-color: #ffffff !important;
+  background-color: var(--color-primary);
+  color: #fafafa !important;
+  transition: 0.3s;
+  @media (min-width: 992px) {
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+  }
+
+  .logo-container {
+    width:100%;
+    .logo{
+      line-height: unset;
+      width:100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .logo-img {
+      min-height: 5.2rem !important;
+    }
+  }
+
+  ul{
+    li a{
+      font-family: poppins-semibold;
+      color:var(--text-2);
+    }
+  }
+}
+
+//Menu Hover jump problem fix
+//menu Hover problem
+.nav-bar > ul li:hover > ul {
+  left: auto;
+  right: 0;
+}
+
+//.nav-bar.nav-dd-zoom ul ul {
+//    right: 0;
+//}
+.nav-bar.nav-dd-fade ul ul {
+    right: 0;
+}
+
+.nav-bar.nav-dd-zoom ul ul {
+    right: 0 !important;
+}
+
+//Sidebar
+
+.nav-sub-menu {
+  background: transparent !important;
+}
+.menu-text-danger{
+  a{
+    color:var(--color-danger) !important;
+  }
+}
+

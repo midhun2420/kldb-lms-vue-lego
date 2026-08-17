@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'poppins-light';
+  src: url('./fonts/poppins/Poppins-Light.ttf');
+}
+
+@font-face {
+  font-family: 'poppins-regular';
+  src: url('./fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'poppins-medium';
+  src: url('./fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'poppins-semibold';
+  src: url('./fonts/poppins/Poppins-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'poppins-Bold';
+  src: url('./fonts/poppins/Poppins-Bold.ttf');
+}
+@font-face {
+  font-family: 'poppins-ExtraBold';
+  src: url('./fonts/poppins/Poppins-ExtraBold.ttf');
+}
+
+.font-poppins-light {
+  font-family: 'poppins-light';
+}
+
+.font-poppins-regular {
+  font-family: 'poppins-regular';
+}
+
+.font-poppins-medium {
+  font-family: 'poppins-medium';
+}
+
+.font-poppins-semibold {
+  font-family: 'poppins-semibold';
+}
+
+.font-poppins-bold {
+  font-family: 'poppins-Bold';
+}
+.font-poppins-extra-bold {
+  font-family: 'poppins-ExtraBold';
+}
+
+.fs-lg--1 {
+  font-size: 0.8rem;
+}
+
+.fs-lg-0 {
+  font-size: 0.85rem;
+}
+
+.fs-lg-1 {
+  font-size: 0.9rem;
+}
+
+.fs-lg-2 {
+  font-size: 1.15rem;
+}
+
+.fs-lg-3 {
+  font-size: 1.463rem;
+}
+
+.fs-lg-4 {
+  font-size: 1.853rem;
+}
+
+.fs-lg-5 {
+  font-size: 2.341rem;
+}
+
+.fs-lg-6 {
+  font-size: 2.953rem;
+}
+
+@media (min-width: 992px) {
+  .fs-lg--1 {
+    font-size: 0.8rem;
+  }
+  .fs-lg-0 {
+    font-size: 0.9rem !important;
+  }
+  .fs-lg-1 {
+    font-size: 1rem !important;
+  }
+  .fs-lg-2 {
+    font-size: 1.25rem;
+  }
+  .fs-lg-3 {
+    font-size: 1.563rem;
+  }
+  .fs-lg-4 {
+    font-size: 1.953rem;
+  }
+  .fs-lg-5 {
+    font-size: 2.441rem;
+  }
+  .fs-lg-6 {
+    font-size: 3.052rem;
+  }
+}

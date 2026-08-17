@@ -1,0 +1,85 @@
+// scss-docs-start color-functions
+// Tint a color: mix a color with white
+@function tint-color($color, $weight) {
+    @return mix(white, $color, $weight);
+}
+
+// Shade a color: mix a color with black
+@function shade-color($color, $weight) {
+    @return mix(black, $color, $weight);
+}
+
+@function getColor($name) {
+    @return var(--color-#{$name});
+}
+
+@function getThemeColor($name) {
+    @return var(--color-#{$name});
+}
+
+@mixin rgb-shade($color, $name, $value, $weight) {
+    $shade:                   shade-color($color, $weight);
+
+    --rgb-#{$name}-#{$value}: #{red($shade)}, #{green($shade)}, #{blue($shade)};
+}
+
+@mixin rgb-tint($color, $name, $value, $weight) {
+    $shade:                   tint-color($color, $weight);
+
+    --rgb-#{$name}-#{$value}: #{red($shade)}, #{green($shade)}, #{blue($shade)};
+}
+
+:root {
+
+    @each $name, $color in $grays {
+        --rgb-#{$name}: #{red($color)}, #{green($color)}, #{blue($color)};
+    }
+
+    @each $name, $color in $grays {
+        --color-#{$name}: rgb(var(--rgb-#{$name}));
+    }
+
+    @each $name, $color in $theme-colors {
+
+        @if $enable-color-variations {
+            @include rgb-shade($color, $name, 900, 80%);
+            @if $enable-full-color-variations { @include rgb-shade($color, $name, 800, 60%); }
+            @include rgb-shade($color, $name, 700, 40%);
+            @if $enable-full-color-variations { @include rgb-shade($color, $name, 600, 20%); }
+        }
+
+        --rgb-#{$name}: #{red($color)}, #{green($color)}, #{blue($color)};
+
+        @if $enable-color-variations {
+            @if $enable-full-color-variations { @include rgb-tint($color, $name, 400, 20%); }
+            @include rgb-tint($color, $name, 300, 40%);
+            @if $enable-full-color-variations { @include rgb-tint($color, $name, 200, 60%); }
+            @include rgb-tint($color, $name, 100, 80%);
+        }
+    }
+
+    @each $name, $color in $theme-colors {
+        @if $enable-color-variations {
+            --color-#{$name}-100: rgb(var(--rgb-#{$name}-100));
+            @if $enable-full-color-variations { --color-#{$name}-200: rgb(var(--rgb-#{$name}-200)); }
+            --color-#{$name}-300: rgb(var(--rgb-#{$name}-300));
+            @if $enable-full-color-variations { --color-#{$name}-400: rgb(var(--rgb-#{$name}-400)); }
+        }
+
+        --color-#{$name}: rgb(var(--rgb-#{$name}));
+
+        @if $enable-color-variations {
+            @if $enable-full-color-variations { --color-#{$name}-600: rgb(var(--rgb-#{$name}-600)); }
+            --color-#{$name}-700: rgb(var(--rgb-#{$name}-700));
+            @if $enable-full-color-variations { --color-#{$name}-800: rgb(var(--rgb-#{$name}-800)); }
+            --color-#{$name}-900: rgb(var(--rgb-#{$name}-900));
+        }
+
+        @if $enable-color-transparencies {
+            @each $opacity in $color-opacities {
+                --color-#{$name}-#{$opacity}: rgba(var(--rgb-#{$name}), #{$opacity/100});
+            }
+        }
+    }
+
+}

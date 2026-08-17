@@ -1,0 +1,181 @@
+{
+    "background-colors": {
+        "bg-1": "#EEEEEE",
+        "bg-2": "#FFFFFF",
+        "bg-3": "#F2F2F2",
+        "bg-4": "#F7F7F7",
+        "bg-5": "#417ebd",
+        "bg-6": "#f5f8fb",
+        "bg-7": "#ecf1fb",
+        "bg-8": "#00a86b",
+        "bg-9": "#f4c431",
+        "bg-10": "#e35151",
+        "bg-11": "#dda0dd",
+         "bg-12": "#708090",
+         "bg-13": "#f3f3f3"
+    },
+
+    "border-color-levels": {
+        "border-color": "#48484840",
+        "border-color-light": "#EDF1F7",
+        "border-color-dark": "#000000",
+        "border-color-table": "#3675B8"
+    },
+
+    "text-colors": {
+        "text-1": "#646464",
+        "text-2": "#707070",
+        "text-3": "#484848",
+        "text-4": "#A8A8A8",
+        "text-5": "#16569e",
+        "text-6": "#3b3b3b",
+        "text-7": "#1e90ff",
+        "text-8": "#b57edc",
+        "text-9": "#708090",
+        "text-10": "#F1CF3B",
+        "text-11": "#00a86b"
+
+    },
+
+    "theme-colors": {
+        "primary": {
+            "color": "#3954A4",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "secondary": {
+            "color": "#2161A8",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "third": {
+            "color": "#417ebd",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "fourth": {
+            "color": "#0397D5",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "500"
+        },
+        "fifth": {
+            "color": "#4e7aff",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "seventh": {
+            "color": "#1e90ff",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "eighth": {
+            "color": "#b768a2",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "nineth": {
+            "color": "#708090",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+
+        "tenth": {
+            "color": "#F1CF3B",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "eleventh": {
+            "color": "#df5459",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "twelveth": {
+            "color": "#0ead80",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+
+        "gray": {
+            "color": "#aee80e",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "dark": {
+            "color": "#000000",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        }
+    },
+
+    "semantic-colors": {
+        "warning": {
+            "color": "#ffc107",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "success": {
+            "color": "#28a745",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "danger": {
+            "color": "#dc3545",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        },
+        "info": {
+            "color": "#17a2b8",
+            "contrast": "white",
+            "focus": "600",
+            "active": "600",
+            "hover": "400"
+        }
+    },
+    "flags": {
+        "enable-grid-classes": true,
+        "enable-offset-classes": false,
+        "enable-color-variations": true,
+        "enable-full-color-variations": true,
+        "enable-color-transparencies": false,
+        "enable-bg-classes": true,
+        "enable-text-classes": true,
+        "enable-bgc-classes": true,
+        "enable-bgg-classes": false,
+        "enable-bgt-classes": false,
+        "enable-text-i-classes": true,
+        "enable-bg-transparency-classes": false,
+        "enable-bg-variations-classes": true
+    }
+}

@@ -1,0 +1,293 @@
+//Sidebar
+.side-bar > ul ul li {
+  border-bottom: unset;
+}
+
+//.sidebar-container {
+//  position: fixed;
+//  height: 100%;
+//  //background-color: var(--color-primary);
+//  z-index: 999 !important;
+//}
+
+.side-bar {
+  background: var(--bg-2) !important;
+  //z-index: 799 !important;
+
+  .logo-container {
+    .logo img {
+      min-height: 2.5em;
+    }
+  }
+
+  > ul {
+    padding: var(--spacer-2) !important;
+    overflow-x: hidden;
+    max-height: 90vh;
+    a i {
+      display: none;
+    }
+
+    li {
+      &:not(:nth-child(1)) {
+        margin-top: var(--spacer-3);
+      }
+
+      a {
+        padding: 0 !important;
+      }
+    }
+  }
+}
+
+.page.page-sidebar > .side-bar {
+  margin-top: 6.2rem !important;
+  position: fixed;
+  min-width: 4rem;
+}
+
+.side-bar.nav-dd-zoom ul.show {
+  -webkit-animation-name: unset !important;
+  animation-name: unset !important;
+}
+
+//Icons
+
+.bull-icon {
+  position: relative;
+
+  &.active {
+    a {
+      background: url("../assets/web/sidebar-icons/icon-bull-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+
+
+  }
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-bull-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.2s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-bull-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+}
+
+.icon-2 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-2-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-2-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+}
+
+.icon-3 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-3-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-3-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+}
+
+.icon-4 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-4-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-4-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+}
+
+.icon-5 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-5-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-5-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+}
+
+.icon-6 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-cow-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-cow-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+}
+
+.icon-7 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/icon-6-blue.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 3rem;
+    height: 3rem;
+    transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/icon-6-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+}
+
+.icon-8 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/blueMasterdata.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2.5rem;
+    height: 2.7rem;
+    //transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("../assets/web/sidebar-icons/masterdatawithbg.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+}
+
+.icon-9 {
+  position: relative;
+
+  a {
+    background: url("../assets/web/sidebar-icons/bluereports.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+    //transition: all 0.5s ease-in-out;
+
+
+    &:hover {
+      background: url("web/sidebar-icons/reports-withbg.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 2.5rem;
+      height: 2.7rem;
+    }
+  }
+
+
+}
+ .icon-10 {
+    position: relative;
+
+    a {
+      background: url("../assets/web/sidebar-icons/icon-10.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 2rem;
+      height: 2rem;
+      transition: all 0.5s ease-in-out;
+
+
+      &:hover {
+        background: url("../assets/web/sidebar-icons/icon-10-white.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+  }

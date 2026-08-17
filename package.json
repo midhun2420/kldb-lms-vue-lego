@@ -1,0 +1,72 @@
+{
+    "name": "kldb-bulls-portal",
+    "version": "0.1.0",
+    "author": "{{ author }}",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "format": "vue-cli-service lint --fix"
+    },
+    "dependencies": {
+        "aos": "^2.3.4",
+        "apexcharts": "^3.32.0",
+        "chart.js": "^3.8.0",
+        "deepmerge": "4.2.2",
+        "ev-emitter": "^2.1.0",
+        "font-awesome": "^4.7.0",
+        "font-icons": "git+https://code.xeoscript.com/front-end-libs/font-icons.git",
+        "lego-framework": "git+https://code.xeoscript.com/xeoscript/lego-framework",
+        "lego-modules": "git+https://code.xeoscript.com/xeoscript/lego-modules",
+        "magic-grid": "^3.2.4",
+        "normalize.css": "^8.0.1",
+        "register-service-worker": "^1.7.1",
+        "sass-vars-loader": "git+https://github.com/ajumell/sass-vars-loader.git",
+        "secure-axios": "git+https://code.xeoscript.com/xeoscript/secure-axios",
+        "swiper": "5.x",
+        "vee-validate": "3.3.9",
+        "vue": "^2.6.11",
+        "vue-apexcharts": "^1.6.2",
+        "vue-awesome-swiper": "^4.1.1",
+        "vue-chartjs": "^4.0.0",
+        "vue-multi-select": "^4.6.0",
+        "vue-number-animation": "^1.0.5",
+        "vue-parallaxy": "^1.1.1",
+        "vue-router": "^3.2.0",
+        "vue-select": "^3.11.2",
+        "vue2-datepicker": "^3.9.1",
+        "vuetable-2": "1.7.5",
+        "vuex": "^3.6.2"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-plugin-pwa": "~4.5.0",
+        "@vue/cli-plugin-router": "~4.5.0",
+        "@vue/cli-plugin-vuex": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/eslint-config-standard": "^5.1.2",
+        "axios": "^0.21.1",
+        "babel-eslint": "^10.1.0",
+        "copy-webpack-plugin": "^6.4.1",
+        "cross-env": "^7.0.3",
+        "eslint": "^6.7.2",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.0",
+        "eslint-plugin-vue": "^6.2.2",
+        "node-forge": "^0.10.0",
+        "node-sass": "^4.12.0",
+        "prerender-spa-plugin": "^3.4.0",
+        "sass-loader": "^8.0.2",
+        "vue-meta": "^2.4.0",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "vuePlugins": {
+        "service": [
+            "node_modules/lego-framework/plugin.js"
+        ]
+    }
+}

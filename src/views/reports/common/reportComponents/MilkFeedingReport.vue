@@ -1,0 +1,139 @@
+<template>
+    <div class="row">
+        <div class="col-12 mt-3">
+            <h3 class="text-primary fs-lg-4 font-poppins-semibold">
+                Milk Feeding
+            </h3>
+        </div>
+        <div class="col-12 mt-3">
+            <s-form @submit="downloadReport" class="row">
+                <div class="col-lg-2">
+                    <validated-date-picker v-model="model.check_date" :disabled-date="disabledAfterToday"
+                                           :rules="rules.checkDate"
+                                           label="Date"
+                                           @input="loadData"
+                                           class="c-input-datepicker field-required"
+                                           format="DD-MM-YYYY"/>
+                </div>
+                <div class="col-lg-2">
+                    <validated-select :options="animalOptions" v-model="model.calf_id"
+                                            label="Calf No"
+                                            class="c-input-select"/>
+                </div>
+                <div class="col-lg-2">
+                    <validated-select :options="reportTypeOptions"
+                                      class="field-required c-input-select "
+                                      label="Download Format"
+                                      :rules="{required:true}"
+                                      v-model="model.format_type"/>
+                </div>
+                <div class="row mt-lg-9">
+                    <div class="col-12">
+                        <div class="fl-x fl-j-e">
+                            <div class="btn-group">
+                                <btn class="text-right"
+                                     text="Download"
+                                     loading-text="Please Wait..."
+                                     :loading="loading"
+                                />
+                                <btn type="reset" @click="BackToHome" text="Cancel" design="basic-b" class="px-4"></btn>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </s-form>
+
+        </div>
+
+    </div>
+</template>
+
+<script>
+import urls from '../../../../data/urls';
+import axios from 'secure-axios';
+
+export default {
+    name: 'milkFeedingReport',
+    data () {
+        return {
+            model: {
+                check_date: '',
+                calf_id: '',
+                format_type: ''
+            },
+            animalOptions: [],
+            loading: false,
+            reportTypeOptions: [
+                { label: 'Excel', value: 'Excel' },
+                { label: 'Pdf', value: 'Pdf' }
+            ],
+            rules: {
+                checkDate: {
+                    required: true,
+                    customValidator: (value) => {
+                        return this.DateValidation(value);
+                    }
+                }
+            }
+        };
+    },
+    methods: {
+        BackToHome () {
+            this.$router.push({ path: '/reports/' });
+        },
+        disabledAfterToday (date) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            return date > today;
+        },
+        async loadData () {
+            this.loading = true;
+            const response = await axios.get(urls.reports.common.calfList + '?check_date=' + this.model.check_date);
+            this.animalOptions = response.data.data;
+            this.loading = false;
+        },
+        DateValidation (checkDate) {
+            const checkDateParts = checkDate.split('-');
+            if (checkDateParts.length !== 3) {
+                return 'Please enter a valid date in the format DD-MM-YYYY.';
+            }
+            const checkDay = parseInt(checkDateParts[0], 10);
+            const checkMonth = parseInt(checkDateParts[1], 10);
+            const checkYear = parseInt(checkDateParts[2], 10);
+            const checkDateObj = new Date(checkYear, checkMonth - 1, checkDay);
+            const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0);
+            if (checkDateObj > currentDate) {
+                return 'Future Date not allowed.';
+            }
+            return true;
+        },
+        async downloadReport () {
+            try {
+                this.loading = true;
+                const response = await axios.form(urls.reports.common.milkFeeding, this.model);
+                const json = response.data;
+                if (json.error === false) {
+                    this.loading = false;
+                    window.open(json.url);
+                } else {
+                    this.loading = false;
+                    this.$notify(json.message, 'Oops!', { type: 'warning' });
+                }
+            } catch (error) {
+                this.$notify(
+                    'Something Went Wrong..!!',
+                    error.response.status + ' ' + error.response.statusText,
+                    { type: 'danger' }
+                );
+                this.loading = false;
+            }
+        }
+
+    }
+};
+</script>
+
+<style scoped>
+
+</style>

@@ -1,0 +1,57 @@
+$color-opacities:      [10, 20, 30, 40, 50, 60, 70, 80, 90];
+
+/*
+Grid
+*/
+$enable-grid-classes:  true;
+$grid-columns:         12;
+$grid-row-columns:     6;
+$grid-breakpoints:     (
+                               xs: 0,
+                               sm: 576px,
+                               md: 768px,
+                               lg: 992px,
+                               xl: 1200px
+                       ) !default;
+$container-max-widths: (
+                               sm: 540px,
+                               md: 720px,
+                               lg: 960px,
+                               xl: 1140px
+                       ) !default;
+
+$border-base:          1px;
+$borders:              (
+                               0: 0,
+                               1: $border-base,
+                               2: $border-base * 2,
+                               3: $border-base * 3,
+                               4: $border-base * 4,
+                               5: $border-base * 5,
+                               6: $border-base * 6,
+                               7: $border-base * 7,
+                               8: $border-base * 8,
+                               9: $border-base * 9,
+                       );
+
+$radius:               0.375rem !default;
+$radiuses:             (
+                               0: 0,
+                               1: ($radius * 1),
+                               2: ($radius * 2),
+                               3: ($radius * 3),
+                               4: ($radius * 4),
+                               5: ($radius * 5),
+                               6: ($radius * 6),
+                               7: ($radius * 7),
+                               8: ($radius * 8),
+                               9: ($radius * 9),
+                       ) !default;
+
+
+$size-variations:      (
+                               xs: 0.65,
+                               sm: 0.875,
+                               lg: 1.25,
+                               xl: 1.75,
+                       ) !default;
