@@ -105,7 +105,18 @@
             </div>
         </div>
         <div>
-            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Collection Date">
+            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Equipment">
+                <template slot="calibration_report" slot-scope="props">
+                    <a
+                        v-if="props.rowData.calibration_report"
+                        :href="props.rowData.calibration_report"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {{ getFileName(props.rowData.calibration_report) }}
+                    </a>
+                    <span v-else>-</span>
+                </template>
             </vue-table>
         </div>
 <!--            <div class="column mt-4">-->
@@ -182,58 +193,59 @@ export default {
             fields: [
                 {
                     name: 'equipment.name',
-                    sortField: 'equipment.name',
+                    // sortField: 'equipment.name',
                     title: 'Equipment'
                 },
                 {
                     name: 'calibration_date',
-                    sortField: 'calibration_date',
+                    // sortField: 'calibration_date',
                     title: 'Calibration Date'
                 },
                 {
                     name: 'amc_date',
-                    sortField: 'amc_date',
+                    // sortField: 'amc_date',
                     title: 'AMC Date'
                 },
                 {
                     name: 'warranty_start_date',
-                    sortField: 'warranty_start_date',
+                    // sortField: 'warranty_start_date',
                     title: 'Warranty Start Date'
                 },
                 {
                     name: 'warranty_end_date',
-                    sortField: 'warranty_end_date',
+                    // sortField: 'warranty_end_date',
                     title: 'Warranty End Date'
                 },
                 {
                     name: 'calibration_due_date',
-                    sortField: 'calibration_due_date',
+                    // sortField: 'calibration_due_date',
                     title: 'Calibration Due Date'
                 },
                 {
                     name: 'amc_due_date',
-                    sortField: 'amc_due_date',
+                    // sortField: 'amc_due_date',
                     title: 'AMC Due Date'
                 },
                 {
                     name: 'equipment_cost',
-                    sortField: 'equipment_cost',
+                    // sortField: 'equipment_cost',
                     title: 'Equipment Cost'
                 },
                 {
                     name: 'amc_cost',
-                    sortField: 'amc_cost',
+                    // sortField: 'amc_cost',
                     title: 'AMC Cost'
                 },
                 {
-                    name: 'calibration_report',
-                    sortField: 'calibration_report',
+                    name: '__slot:calibration_report',
+                    // sortField: 'calibration_report',
                     title: 'Calibration Report'
+
                 }
             ],
             viewData: [],
-            currentPage: 1,
-            itemsPerPage: 10,
+            // currentPage: 1,
+            // itemsPerPage: 10,
             fileInputKey: 0,
             formKey: 0,
             model: {
@@ -293,18 +305,18 @@ export default {
             equipmentOptions: masterURLs.master.equipment.vueSelect
         };
     },
-    mounted () {
-        this.loadData();
-    },
-    computed: {
-        paginatedData () {
-            const start = (this.currentPage - 1) * this.itemsPerPage;
-            return this.viewData.slice(start, start + this.itemsPerPage);
-        },
-        totalPages () {
-            return Math.ceil(this.viewData.length / this.itemsPerPage);
-        }
-    },
+    // mounted () {
+    //     this.loadData();
+    // },
+    // computed: {
+    //     paginatedData () {
+    //         const start = (this.currentPage - 1) * this.itemsPerPage;
+    //         return this.viewData.slice(start, start + this.itemsPerPage);
+    //     },
+    //     totalPages () {
+    //         return Math.ceil(this.viewData.length / this.itemsPerPage);
+    //     }
+    // },
     methods: {
         validateFileSize (file) {
             const MAX_SIZE = 2 * 1024 * 1024;
@@ -327,22 +339,22 @@ export default {
                 this.fileInputKey++;
             }
         },
-        nextPage () {
-            if (this.currentPage < this.totalPages) {
-                this.currentPage++;
-            }
-        },
-        prevPage () {
-            if (this.currentPage > 1) {
-                this.currentPage--;
-            }
-        },
-        async loadData () {
-            this.viewData = [];
-            const response = await axios.get(urls.equipment_calibration.list);
-            this.viewData = response.data.data;
-            console.log('response', this.data);
-        },
+        // nextPage () {
+        //     if (this.currentPage < this.totalPages) {
+        //         this.currentPage++;
+        //     }
+        // },
+        // prevPage () {
+        //     if (this.currentPage > 1) {
+        //         this.currentPage--;
+        //     }
+        // },
+        // async loadData () {
+        //     this.viewData = [];
+        //     const response = await axios.get(urls.equipment_calibration.list);
+        //     this.viewData = response.data.data;
+        //     console.log('response', this.data);
+        // },
         disabledAfterToday (date) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);

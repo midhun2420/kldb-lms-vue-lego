@@ -8,8 +8,18 @@
 
         </div>
     </div>
-        <div>
-            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Collection Date">
+        <div class="table-container">
+            <div class="filter-container">
+                <validated-date-picker
+                    format="DD-MM-YYYY"
+                    :clearable="true"
+                    v-model="collection_date"
+                    label="Collection Date"
+                    class="c-input-datepicker">
+                </validated-date-picker>
+            </div>
+            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" :show-search-box="false"
+                       :extra-params="{ collection_date: collection_date }">
                 <template slot="actions" slot-scope="props">
                     <div class="btn-group">
                         <btn text="" size="sm" icon="fa fa-pencil" color="primary"
@@ -78,28 +88,29 @@ export default {
             viewData: [],
             currentPage: 1,
             itemsPerPage: 10,
+            collection_date: '',
             // tableLoading: false,
             loadingData: false,
             listURL: urls.semenCollection.list,
             fields: [
                 {
                     name: 'collection_date',
-                    sortField: 'collection_date',
+                    // sortField: 'collection_date',
                     title: 'Collection Date'
                 },
                 {
                     name: 'batch_names',
-                    sortField: 'batch_names',
+                    // sortField: 'batch_names',
                     title: 'Batch'
                 },
                 {
                     name: 'dose_type.name',
-                    sortField: 'dose_type.name',
+                    // sortField: 'dose_type.name',
                     title: 'Dose Type'
                 },
                 {
                     name: 'animals_count',
-                    sortField: 'animals_count',
+                    // sortField: 'animals_count',
                     title: 'No of Animals'
                 },
                 {
@@ -119,6 +130,13 @@ export default {
         },
         totalPages () {
             return Math.ceil(this.viewData.length / this.itemsPerPage);
+        }
+    },
+    watch: {
+        collection_date () {
+            this.$nextTick(() => {
+                this.$refs.table.loadData();
+            });
         }
     },
     methods: {
@@ -192,5 +210,15 @@ table {
     table, th, tr {
         border-radius: 4px;
 
+    }
+    .table-container {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .filter-container {
+        width: 250px;
+        margin-bottom: 10px;
     }
 </style>

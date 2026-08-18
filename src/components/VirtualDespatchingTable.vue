@@ -135,51 +135,54 @@
                     </div>
                 </div>
             </s-form>
-
-            <div class="row mt-4" v-if="tableLoading">
-            <div class="col-lg-12  vertical pl-0 pr-0">
-                <div class="card pl-0 pr-0 pb-0 ml-lg-auto">
-                    <table style="width:100%">
-                        <th class="text-primary">SI No</th>
-                        <th class="text-primary">Bull No</th>
-                        <th class="text-primary">Bull Name</th>
-                        <th class="text-primary">Breed</th>
-                        <th class="text-primary">RSB</th>
-                        <th class="text-primary">Ptm</th>
-                        <th class="text-primary">Position</th>
-                        <th class="text-primary">Dose</th>
-                        <th class="text-primary ">Container_no</th>
-                        <th class="text-primary ">Location</th>
-                        <tr class="mt-3" v-if="loadingSaved">
-                                        <td colspan="4">Please wait while fetching the data...</td>
-                                    </tr>
-                        <tr v-if="!loadingSaved && paginatedSavedBullList.length === 0" class="text-center">
-                                <td colspan="11" class="mt-3"> No data</td>
-                            </tr>
-                        <tr v-for="(item, i) in paginatedSavedBullList" :key="i" @click="clickedSavedBull(i)" style="cursor: pointer">
-                            <td>{{ (i + 1) + (savedCurrentPage - 1) * savedPageSize }}</td>
-                            <td>{{ item.bull.reg_no }}</td>
-                            <td>{{ item.bull.bull_name }}</td>
-                            <td>{{ item.bull.breed }}</td>
-                            <td>{{ item.rsb_despatch }}</td>
-                            <td>{{ item.ptm }}</td>
-                            <td>{{ item.position }}</td>
-                            <td>{{ item.dose }}</td>
-                            <td>{{ item.container_no }}</td>
-                            <td>{{ item.location }}</td>
-
-                        </tr>
-                    </table>
-                    <div class="pagination mt-4 text-center">
-                            <btn-group>
-                              <btn v-if="savedCurrentPage  > 1" @click="prevSavedPage"><img src="../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                              <span>Page {{ savedCurrentPage  }} of {{ savedTotalPages  }}</span>
-                              <btn v-if="savedCurrentPage  < savedTotalPages " @click="nextSavedPage"><img src="../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                                </btn-group>
-                    </div>
-                </div>
+            <div class="mt-4 ml-lg-n3">
+            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Bull No">
+            </vue-table>
             </div>
-        </div>
+<!--            <div class="row mt-4" v-if="tableLoading">-->
+<!--            <div class="col-lg-12  vertical pl-0 pr-0">-->
+<!--                <div class="card pl-0 pr-0 pb-0 ml-lg-auto">-->
+<!--                    <table style="width:100%">-->
+<!--                        <th class="text-primary">SI No</th>-->
+<!--                        <th class="text-primary">Bull No</th>-->
+<!--                        <th class="text-primary">Bull Name</th>-->
+<!--                        <th class="text-primary">Breed</th>-->
+<!--                        <th class="text-primary">RSB</th>-->
+<!--                        <th class="text-primary">Ptm</th>-->
+<!--                        <th class="text-primary">Position</th>-->
+<!--                        <th class="text-primary">Dose</th>-->
+<!--                        <th class="text-primary ">Container_no</th>-->
+<!--                        <th class="text-primary ">Location</th>-->
+<!--                        <tr class="mt-3" v-if="loadingSaved">-->
+<!--                                        <td colspan="4">Please wait while fetching the data...</td>-->
+<!--                                    </tr>-->
+<!--                        <tr v-if="!loadingSaved && paginatedSavedBullList.length === 0" class="text-center">-->
+<!--                                <td colspan="11" class="mt-3"> No data</td>-->
+<!--                            </tr>-->
+<!--                        <tr v-for="(item, i) in paginatedSavedBullList" :key="i" @click="clickedSavedBull(i)" style="cursor: pointer">-->
+<!--                            <td>{{ (i + 1) + (savedCurrentPage - 1) * savedPageSize }}</td>-->
+<!--                            <td>{{ item.bull.reg_no }}</td>-->
+<!--                            <td>{{ item.bull.bull_name }}</td>-->
+<!--                            <td>{{ item.bull.breed }}</td>-->
+<!--                            <td>{{ item.rsb_despatch }}</td>-->
+<!--                            <td>{{ item.ptm }}</td>-->
+<!--                            <td>{{ item.position }}</td>-->
+<!--                            <td>{{ item.dose }}</td>-->
+<!--                            <td>{{ item.container_no }}</td>-->
+<!--                            <td>{{ item.location }}</td>-->
+
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                    <div class="pagination mt-4 text-center">-->
+<!--                            <btn-group>-->
+<!--                              <btn v-if="savedCurrentPage  > 1" @click="prevSavedPage"><img src="../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                              <span>Page {{ savedCurrentPage  }} of {{ savedTotalPages  }}</span>-->
+<!--                              <btn v-if="savedCurrentPage  < savedTotalPages " @click="nextSavedPage"><img src="../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                                </btn-group>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
             <modal ref="takePrint" title=" ">
                 <div class="row">
@@ -223,6 +226,45 @@ export default {
         return {
             URL: urls.virtualDespatching.addEdit,
             RSBOptionsURL: masterURLs.master.rsb.vueSelect,
+            listURL: urls.virtualDespatching.DespatchPendingList,
+            fields: [
+                {
+                    name: 'bull.reg_no',
+                    title: 'Bull No'
+                },
+                {
+                    name: 'bull.bull_name',
+                    title: 'Bull Name'
+                },
+                {
+                    name: 'bull.breed',
+                    title: 'Breed'
+                },
+                {
+                    name: 'rsb_despatch',
+                    title: 'RSB'
+                },
+                {
+                    name: 'ptm',
+                    title: 'PTM'
+                },
+                {
+                    name: 'position',
+                    title: 'Position'
+                },
+                {
+                    name: 'dose',
+                    title: 'Dose'
+                },
+                {
+                    name: 'container_no',
+                    title: 'Container No'
+                },
+                {
+                    name: 'location',
+                    title: 'Location'
+                }
+            ],
             loading: false,
             tableLoading: false,
             loadingData: false,
@@ -376,12 +418,14 @@ export default {
                 if (result.success) {
                     this.$notify('Added Successfully', 'Success', { type: 'success' });
                     this.loading = false;
+                    await this.$refs.table.refreshTable();
                     if (modelId) {
                         await this.clearSelected();
                         await this.clearData();
                         const sresponse = await axios.get(urls.virtualDespatching.DespatchPendingList);
                         this.savedBullsList = sresponse.data.data;
                         this.tableLoading = true;
+                        this.$refs.table.refreshTable();
                         this.loadingData = false;
                     } else {
                         await this.clearSelected();

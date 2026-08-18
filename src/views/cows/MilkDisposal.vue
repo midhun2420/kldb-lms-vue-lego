@@ -32,46 +32,76 @@
             </div>
         </div>
         </s-form>
-        <div class="col-12 mt-3">
-                    <div class="card pl-0 pr-0 pt-0 pb-0 of-h">
-<!--                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>-->
-                        <table style="width:100%" class="c-table-1" v-if="viewData.length">
-                            <thead>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Disposal Date</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Disposal File</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Remarks</h5></th>
-                            </thead>
-                            <tbody class="">
-                            <tr v-for="(item, i) in paginatedData" :key="i">
-                                <td>{{ item.milk_disposal_date }}</td>
-
-                                <td>
-                                  <a
-                                    :href="item.milk_disposal_file"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    v-if="item.milk_disposal_file"
-                                  >
-                                    {{ getFileName(item.milk_disposal_file) }}
-                                  </a>
-                                  <span v-else>-</span>
-                                </td>
-                                <td>{{ item.remarks }}</td>
-
-                            </tr>
-                            </tbody>
-
-                        </table>
-                        <div class="pagination text-center" v-if="viewData.length">
-                            <btn-group class="ml-2">
-                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>
-                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                                </btn-group>
-                        </div>
-
+        <div class="table-container">
+            <div class="filter-container">
+                <validated-date-picker
+                        format="DD-MM-YYYY"
+                        :clearable="true"
+                        class="c-input-datepicker"
+                        v-model="milk_disposal_date"
+                        label="Disposal Date">
+                </validated-date-picker>
+            </div>
+            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" :show-search-box="false"
+                       :extra-params="{ milk_disposal_date: milk_disposal_date }">
+                <template slot="milk_disposal_file" slot-scope="props">
+                    <a
+                        v-if="props.rowData.milk_disposal_file"
+                        :href="props.rowData.milk_disposal_file"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {{ getFileName(props.rowData.milk_disposal_file) }}
+                    </a>
+                    <span v-else>-</span>
+                </template>
+                <template slot="action" slot-scope="props">
+                    <div class="btn-group">
+                        <btn class="btn btn-sm btn-primary border-r-1 bordered p-1" @click="detailsPage(props.rowData.id)" style="cursor: pointer">Edit</btn>
                     </div>
-                </div>
+                </template>
+            </vue-table>
+        </div>
+<!--        <div class="col-12 mt-3">-->
+<!--                    <div class="card pl-0 pr-0 pt-0 pb-0 of-h">-->
+<!--&lt;!&ndash;                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>&ndash;&gt;-->
+<!--                        <table style="width:100%" class="c-table-1" v-if="viewData.length">-->
+<!--                            <thead>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Disposal Date</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Disposal File</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Remarks</h5></th>-->
+<!--                            </thead>-->
+<!--                            <tbody class="">-->
+<!--                            <tr v-for="(item, i) in paginatedData" :key="i">-->
+<!--                                <td>{{ item.milk_disposal_date }}</td>-->
+
+<!--                                <td>-->
+<!--                                  <a-->
+<!--                                    :href="item.milk_disposal_file"-->
+<!--                                    target="_blank"-->
+<!--                                    rel="noopener noreferrer"-->
+<!--                                    v-if="item.milk_disposal_file"-->
+<!--                                  >-->
+<!--                                    {{ getFileName(item.milk_disposal_file) }}-->
+<!--                                  </a>-->
+<!--                                  <span v-else>-</span>-->
+<!--                                </td>-->
+<!--                                <td>{{ item.remarks }}</td>-->
+
+<!--                            </tr>-->
+<!--                            </tbody>-->
+
+<!--                        </table>-->
+<!--                        <div class="pagination text-center" v-if="viewData.length">-->
+<!--                            <btn-group class="ml-2">-->
+<!--                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>-->
+<!--                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                                </btn-group>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
 
     </div>
 </template>
@@ -85,6 +115,22 @@ export default {
     data () {
         return {
             URL: urls.cowMilkDisposal.addEdit,
+            listURL: urls.cowMilkDisposal.list,
+            milk_disposal_date: '',
+            fields: [
+                {
+                    name: 'milk_disposal_date',
+                    title: 'Disposal Date'
+                },
+                {
+                    name: '__slot:milk_disposal_file',
+                    title: 'Disposal File'
+                },
+                {
+                    name: 'remarks',
+                    title: 'Remarks'
+                }
+            ],
             loading: false,
             viewData: [],
             currentPage: 1,
@@ -109,6 +155,13 @@ export default {
         },
         totalPages () {
             return Math.ceil(this.viewData.length / this.itemsPerPage);
+        }
+    },
+    watch: {
+        milk_disposal_date () {
+            this.$nextTick(() => {
+                this.$refs.table.loadData();
+            });
         }
     },
     methods: {
@@ -181,5 +234,14 @@ export default {
 </script>
 
 <style scoped>
+    .table-container {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 20px;
+    }
 
+    .filter-container {
+        width: 250px;
+        margin-bottom: 10px;
+    }
 </style>

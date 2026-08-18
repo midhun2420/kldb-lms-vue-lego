@@ -6,39 +6,49 @@
                     <btn text=" " @click="backToDespatch" icon="fa fa-arrow-left" class="mb-2"></btn>
                     <h3 class="text-primary mt-2 mb-4 font-poppins-semibold">Despatch Details</h3>
                 </div>
-                 <validated-date-picker class="c-input-datepicker fs-lg--1 field-required" format="DD-MM-YYYY"
-                                                   placeholder="Date" @input="loadData" :rules="{required:true}"
-                                                   v-model="despatch_date"></validated-date-picker>
+<!--                 <validated-date-picker class="c-input-datepicker fs-lg&#45;&#45;1 field-required" format="DD-MM-YYYY"-->
+<!--                                                   placeholder="Date" @input="loadData" :rules="{required:true}"-->
+<!--                                                   v-model="despatch_date"></validated-date-picker>-->
                 <div class="col-lg-12 vertical pl-0 pr-0">
                     <div class="card p-0 ">
+                        <div class="filter-container">
+                            <validated-date-picker
+                                    format="DD-MM-YYYY"
+                                    :clearable="true"
+                                    class="c-input-datepicker ml-4"
+                                    v-model="despatch_date"
+                                    label="Despatch Date">
+                            </validated-date-picker>
+                        </div>
+                         <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" :show-search-box="false" :extra-params="{ despatch_date: despatch_date }">
+                         </vue-table>
+<!--                        <table style="width:100% ">-->
+<!--                            <tr class="mt-3 mb-3">-->
+<!--                                <th class="text-primary">Despatch Date</th>-->
+<!--                                <th class="text-primary">Bull No</th>-->
+<!--                                <th class="text-primary">Location</th>-->
+<!--                                <th class="text-primary">Dose</th>-->
+<!--                                <th class="text-primary">Position</th>-->
+<!--                                <th class="text-primary">Container Number</th>-->
+<!--                                <th class="text-primary">RSB Despatch</th>-->
+<!--                            </tr>-->
+<!--                            <tr class="text-center mt-3 mb-3" v-if="dispatchData.length === 0 && !loadingData">-->
+<!--                                <td colspan="7" class="mt-3"> No data</td>-->
+<!--                            </tr>-->
+<!--                            <tr v-if="loadingData" class="text-center">-->
+<!--                                <td colspan="7" class="mt-3"> Please wait while fetching data...</td>-->
+<!--                            </tr>-->
+<!--                            <tr v-for="(item, i) in dispatchData" :key="i" >-->
+<!--                                <td>{{ item.created_date }}</td>-->
+<!--                                <td>{{ item.bull.reg_no }}</td>-->
+<!--                                <td>{{ item.location }}</td>-->
+<!--                                <td>{{ item.dose }}</td>-->
+<!--                                <td>{{ item.position }}</td>-->
+<!--                                <td>{{ item.container_no }}</td>-->
+<!--                                <td>{{ item.rsb_despatch }}</td>-->
 
-                        <table style="width:100% ">
-                            <tr class="mt-3 mb-3">
-                                <th class="text-primary">Despatch Date</th>
-                                <th class="text-primary">Bull No</th>
-                                <th class="text-primary">Location</th>
-                                <th class="text-primary">Dose</th>
-                                <th class="text-primary">Position</th>
-                                <th class="text-primary">Container Number</th>
-                                <th class="text-primary">RSB Despatch</th>
-                            </tr>
-                            <tr class="text-center mt-3 mb-3" v-if="dispatchData.length === 0 && !loadingData">
-                                <td colspan="7" class="mt-3"> No data</td>
-                            </tr>
-                            <tr v-if="loadingData" class="text-center">
-                                <td colspan="7" class="mt-3"> Please wait while fetching data...</td>
-                            </tr>
-                            <tr v-for="(item, i) in dispatchData" :key="i" >
-                                <td>{{ item.created_date }}</td>
-                                <td>{{ item.bull.reg_no }}</td>
-                                <td>{{ item.location }}</td>
-                                <td>{{ item.dose }}</td>
-                                <td>{{ item.position }}</td>
-                                <td>{{ item.container_no }}</td>
-                                <td>{{ item.rsb_despatch }}</td>
-
-                            </tr>
-                        </table>
+<!--                            </tr>-->
+<!--                        </table>-->
                     </div>
                 </div>
                 <btn text="Take Print" @click="downloadReport" :loading="downloading"
@@ -60,7 +70,38 @@ export default {
         return {
             loadingData: false,
             despatch_date: '',
-            dispatchData: []
+            dispatchData: [],
+            listURL: urls.virtualDespatching.list,
+            fields: [
+                {
+                    name: 'created_date',
+                    title: 'Despatch Date'
+                },
+                {
+                    name: 'bull.reg_no',
+                    title: 'Bull No'
+                },
+                {
+                    name: 'location',
+                    title: 'Location'
+                },
+                {
+                    name: 'dose',
+                    title: 'Dose'
+                },
+                {
+                    name: 'position',
+                    title: 'Position'
+                },
+                {
+                    name: 'container_no',
+                    title: 'Container Number'
+                },
+                {
+                    name: 'rsb_despatch',
+                    title: 'RSB Despatch'
+                }
+            ]
         };
     },
     mounted () {
@@ -136,4 +177,8 @@ table, th, tr {
     border-radius: 1px;
 
 }
+.filter-container {
+        width: 250px;
+        margin-bottom: 10px;
+    }
 </style>

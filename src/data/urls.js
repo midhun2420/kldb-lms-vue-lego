@@ -171,7 +171,8 @@ export default {
         vueSelect: baseUrl + 'bull/bull-regularization-vue-select/',
         details: baseUrl + 'bull/bull-regularization-detail/',
         selectedBulls: baseUrl + 'bull/regularization-animal-vue-select/',
-        selectedBullsList: baseUrl + 'bull/regularization-due-selection-list/'
+        selectedBullsList: baseUrl + 'bull/regularization-due-selection-list/',
+        dueList: baseUrl + 'bull/regularization-due-list/'
 
     },
     quarantine: {

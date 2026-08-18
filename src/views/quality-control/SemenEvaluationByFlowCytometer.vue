@@ -186,39 +186,67 @@
     </div>
         <div class="col-6 ml-4" v-if="viewData.length">
                     <div class="row fl-j-e">
-                        <btn class="px-4 mt-2" style="cursor: pointer" @click="BackToHome">Back</btn>
+                        <btn class="px-4 mt-2 mr-3" style="cursor: pointer" @click="BackToHome">Back</btn>
                     </div>
-                    <div class="card pl-0 pr-0 pb-0 ml-lg-auto mt-6">
-<!--                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>-->
-                        <table style="width:100%" class="c-table-1" v-if="viewData.length">
-                            <thead>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Test Date</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Production Date</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Bull No</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Ejaculation No</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Action</h5></th>
-                            </thead>
-                            <tbody class="">
-                            <tr v-for="(item, i) in paginatedData" :key="i">
-                                <td>{{ item.test_date }}</td>
-                                <td>{{ item.production_date }}</td>
-                                <td>{{ item.bull }}</td>
-                                <td>{{ item.ejaculate_no }}</td>
-                                <td><btn text="view" @click="detailsPage(item.id)" icon="fa fa-eye" size="xs" class="mb-0"></btn></td>
-
-                            </tr>
-                            </tbody>
-
-                        </table>
-                        <div class="pagination text-center" v-if="viewData.length">
-                            <btn-group class="ml-2">
-                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>
-                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                                </btn-group>
-                        </div>
-
+                    <div class="border-r-1 mt-2" style="background-color: white;">
+                       <validated-date-picker
+                        format="DD-MM-YYYY"
+                        :clearable="true"
+                        class="c-input-datepicker col-4"
+                        v-model="test_date"
+                        label="Test Date">
+                        </validated-date-picker>
+                        <vue-table
+                            ref="table"
+                            :fields="fields"
+                            :url="listURL"
+                            :per-page="10"
+                            :show-search-box="false"
+                            :extra-params="{ test_date: test_date }">
+                            <template slot="actions" slot-scope="props">
+                                <div class="btn-group">
+                                    <btn
+                                        text="view"
+                                        @click="detailsPage(props.rowData.id)"
+                                        icon="fa fa-eye"
+                                        size="xs"
+                                        class="mb-0">
+                                    </btn>
+                                </div>
+                            </template>
+                        </vue-table>
                     </div>
+<!--                    <div class="card pl-0 pr-0 pb-0 ml-lg-auto mt-6">-->
+<!--&lt;!&ndash;                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>&ndash;&gt;-->
+<!--                        <table style="width:100%" class="c-table-1" v-if="viewData.length">-->
+<!--                            <thead>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Test Date</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Production Date</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Bull No</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Ejaculation No</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Action</h5></th>-->
+<!--                            </thead>-->
+<!--                            <tbody class="">-->
+<!--                            <tr v-for="(item, i) in paginatedData" :key="i">-->
+<!--                                <td>{{ item.test_date }}</td>-->
+<!--                                <td>{{ item.production_date }}</td>-->
+<!--                                <td>{{ item.bull }}</td>-->
+<!--                                <td>{{ item.ejaculate_no }}</td>-->
+<!--                                <td><btn text="view" @click="detailsPage(item.id)" icon="fa fa-eye" size="xs" class="mb-0"></btn></td>-->
+
+<!--                            </tr>-->
+<!--                            </tbody>-->
+
+<!--                        </table>-->
+<!--                        <div class="pagination text-center" v-if="viewData.length">-->
+<!--                            <btn-group class="ml-2">-->
+<!--                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>-->
+<!--                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                                </btn-group>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
                 </div>
             </div>
 
@@ -237,6 +265,30 @@ export default {
             loading: false,
             tableLoading: false,
             URL: urls.semen_evaluation_cytometer.addEdit,
+            listURL: urls.semen_evaluation_cytometer.list,
+            test_date: '',
+            fields: [
+                {
+                    name: 'test_date',
+                    title: 'Test Date'
+                },
+                {
+                    name: 'production_date',
+                    title: 'Production Date'
+                },
+                {
+                    name: 'bull',
+                    title: 'Bull'
+                },
+                {
+                    name: 'ejaculate_no',
+                    title: 'Ejaculation No'
+                },
+                {
+                    name: '__slot:actions',
+                    title: 'Actions'
+                }
+            ],
             viewData: [],
             currentPage: 1,
             itemsPerPage: 10,
@@ -292,6 +344,15 @@ export default {
         },
         totalPages () {
             return Math.ceil(this.viewData.length / this.itemsPerPage);
+        }
+    },
+    watch: {
+        test_date () {
+            this.$nextTick(() => {
+                if (this.$refs.table) {
+                    this.$refs.table.loadData();
+                }
+            });
         }
     },
     methods: {

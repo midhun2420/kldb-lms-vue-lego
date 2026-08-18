@@ -139,36 +139,49 @@
             <div>
                 <h4 class="text-primary mt-2 mb-4 font-poppins-semibold ">Bull Screening List</h4>
             </div>
-            <table style="width:100%" class="c-table-1 mt-2">
-                <th class="text-primary">Bull</th>
-                <th class="text-primary">Screening Date</th>
-                <th class="text-primary">Disease Type</th>
-<!--                <th class="text-primary">Status</th>-->
-                <th class="text-primary">Uploaded File</th>
-                <tr v-for="(item, i) in paginatedBulls" :key="i">
-                    <td style="white-space: pre-line">{{ item.regno}}</td>
-                    <td>{{ item.screening_date }}</td>
-<!--                    <td>{{ item.status}}</td>-->
-                    <td>{{ item.disease_type}}</td>
-                    <td>
-                      <span v-if="item.screening_file">
-                        <a :href="item.screening_file" target="_blank">
-                          {{ item.screening_file.split('/').pop() }} <!-- show only filename -->
+            <vue-table ref="table" :fields="fields" :url="screeningListURL" :per-page="10" search-placeholder="Bull">
+                <template slot="screening_file" slot-scope="props">
+                        <a
+                            v-if="props.rowData.screening_file"
+                            :href="props.rowData.screening_file"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {{ getFileName(props.rowData.screening_file) }}
                         </a>
-                      </span>
-                      <span v-else>-</span>
-                    </td>
+                        <span v-else>-</span>
+                </template>
+            </vue-table>
+<!--            <table style="width:100%" class="c-table-1 mt-2">-->
+<!--                <th class="text-primary">Bull</th>-->
+<!--                <th class="text-primary">Screening Date</th>-->
+<!--                <th class="text-primary">Disease Type</th>-->
+<!--&lt;!&ndash;                <th class="text-primary">Status</th>&ndash;&gt;-->
+<!--                <th class="text-primary">Uploaded File</th>-->
+<!--                <tr v-for="(item, i) in paginatedBulls" :key="i">-->
+<!--                    <td style="white-space: pre-line">{{ item.regno}}</td>-->
+<!--                    <td>{{ item.screening_date }}</td>-->
+<!--&lt;!&ndash;                    <td>{{ item.status}}</td>&ndash;&gt;-->
+<!--                    <td>{{ item.disease_type}}</td>-->
+<!--                    <td>-->
+<!--                      <span v-if="item.screening_file">-->
+<!--                        <a :href="item.screening_file" target="_blank">-->
+<!--                          {{ item.screening_file.split('/').pop() }} &lt;!&ndash; show only filename &ndash;&gt;-->
+<!--                        </a>-->
+<!--                      </span>-->
+<!--                      <span v-else>-</span>-->
+<!--                    </td>-->
 
-                </tr>
-            </table>
+<!--                </tr>-->
+<!--            </table>-->
         </div>
-        <div class="pagination text-center">
-            <btn-group class="ml-2">
-              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>
-              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                </btn-group>
-        </div>
+<!--        <div class="pagination text-center">-->
+<!--            <btn-group class="ml-2">-->
+<!--              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>-->
+<!--              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                </btn-group>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -191,6 +204,24 @@ export default {
             frequencyOptionURL: masterURLs.master.frequency.vueSelect,
             // # added list url
             screeningListURL: urls.diseaseScreening.list,
+            fields: [
+                {
+                    name: 'regno',
+                    title: 'Bull'
+                },
+                {
+                    name: 'screening_date',
+                    title: 'Screening Date'
+                },
+                {
+                    name: 'disease_type',
+                    title: 'Disease Type'
+                },
+                {
+                    name: '__slot:screening_file',
+                    title: 'Uploaded File'
+                }
+            ],
             selectedBullsList: [],
             itemsPerPage: 10,
             currentPage: 1,
@@ -254,6 +285,10 @@ export default {
             if (this.currentPage > 1) {
                 this.currentPage--;
             }
+        },
+        getFileName (path) {
+            if (!path) return '';
+            return path.split('/').pop(); // Extracts the filename from a full path
         },
         // list of the bulls
         async loadBulls () {
@@ -374,7 +409,7 @@ export default {
                         this.$refs.form.reset();
                     }
                     this.formKey++;
-
+                    await this.$refs.table.refreshTable();
                     // await this.$router.push({ path: '/semen-station/' });
                 } else {
                     const errors = response.data.errors;

@@ -107,56 +107,66 @@
             </div>
         </s-form>
         <div class="ml-4 mt-1"><h5 class="text-danger">*Note: Collection Details can only be edited before PTM is completed.*</h5></div>
-        <div class="column fl-x" v-if="tableLoading">
-        <div class="col-lg-12  ">
-            <div class="card pl-0 pr-0 pb-0 ml-lg-auto">
-                <table class="c-table-1" v-if="viewData.length" style="width:100%;">
-                    <thead>
-                        <th class="text-primary">Collection Date</th>
+        <div>
+            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Reg No"
+                       :extra-params="tableParams">
+                <template slot="action" slot-scope="props">
+                    <div class="btn-group">
+                        <btn class="btn btn-sm btn-primary border-r-1 bordered p-1" @click="detailsPage(props.rowData.id)" style="cursor: pointer">Edit</btn>
+                    </div>
+                </template>
+            </vue-table>
+        </div>
+<!--        <div class="column fl-x" v-if="tableLoading">-->
+<!--        <div class="col-lg-12  ">-->
+<!--            <div class="card pl-0 pr-0 pb-0 ml-lg-auto">-->
+<!--                <table class="c-table-1" v-if="viewData.length" style="width:100%;">-->
+<!--                    <thead>-->
+<!--                        <th class="text-primary">Collection Date</th>-->
 
-                        <th class="text-primary">Reg No</th>
-                        <th class="text-primary">Bull Name</th>
-                        <th class="text-primary">Ejaculation No</th>
-                        <th class="text-primary">PTM</th>
-                        <th class="text-primary">Recorded Dose</th>
-<!--                        <th class="text-primary">Status</th>-->
-                        <th class="text-primary">Action</th>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, i) in paginatedData" :key="i">
-                        <td>{{ item.collection_date }}</td>
-                        <td>{{ item.bull.reg_no }}</td>
-                        <td>{{ item.bull.bull_name }}</td>
-                        <td>{{ item.ejaculation_no }}</td>
-                        <td>{{ item.ptm }}</td>
-                        <td>{{ item.recorded_dose}}</td>
-<!--                        <td>{{ item.status}}</td>-->
-                        <td><btn class="btn btn-sm btn-primary border-r-1 bordered p-1" @click="detailsPage(item.id)" style="cursor: pointer">Edit</btn></td>
-                    </tr>
-                    </tbody>
-<!--                    <tr class="mt-3" v-if="loadingData">-->
-<!--                        <td colspan="4">Please wait while fetching the data...</td>-->
+<!--                        <th class="text-primary">Reg No</th>-->
+<!--                        <th class="text-primary">Bull Name</th>-->
+<!--                        <th class="text-primary">Ejaculation No</th>-->
+<!--                        <th class="text-primary">PTM</th>-->
+<!--                        <th class="text-primary">Recorded Dose</th>-->
+<!--&lt;!&ndash;                        <th class="text-primary">Status</th>&ndash;&gt;-->
+<!--                        <th class="text-primary">Action</th>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                        <tr v-for="(item, i) in paginatedData" :key="i">-->
+<!--                        <td>{{ item.collection_date }}</td>-->
+<!--                        <td>{{ item.bull.reg_no }}</td>-->
+<!--                        <td>{{ item.bull.bull_name }}</td>-->
+<!--                        <td>{{ item.ejaculation_no }}</td>-->
+<!--                        <td>{{ item.ptm }}</td>-->
+<!--                        <td>{{ item.recorded_dose}}</td>-->
+<!--&lt;!&ndash;                        <td>{{ item.status}}</td>&ndash;&gt;-->
+<!--                        <td><btn class="btn btn-sm btn-primary border-r-1 bordered p-1" @click="detailsPage(item.id)" style="cursor: pointer">Edit</btn></td>-->
 <!--                    </tr>-->
-<!--                    <tr v-if="!loadingData && collectionList.length === 0" class="text-center">-->
-<!--                        <td colspan="6" class="mt-3"> No data</td>-->
-<!--                    </tr>-->
-                </table>
-                <div v-if="loadingData" class="text-center mt-3 mb-3">
-                    Please wait while fetching the data...
-                  </div>
-                  <div v-if="!loadingData && viewData.length === 0" class="text-center mt-3 mb-3">
-                    No data
-                  </div>
-                <div class="pagination text-center" v-if="viewData.length">
-                            <btn-group class="ml-2">
-                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>
-                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                                </btn-group>
-                </div>
-            </div>
-        </div>
-        </div>
+<!--                    </tbody>-->
+<!--&lt;!&ndash;                    <tr class="mt-3" v-if="loadingData">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td colspan="4">Please wait while fetching the data...</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr v-if="!loadingData && collectionList.length === 0" class="text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td colspan="6" class="mt-3"> No data</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--                </table>-->
+<!--                <div v-if="loadingData" class="text-center mt-3 mb-3">-->
+<!--                    Please wait while fetching the data...-->
+<!--                  </div>-->
+<!--                  <div v-if="!loadingData && viewData.length === 0" class="text-center mt-3 mb-3">-->
+<!--                    No data-->
+<!--                  </div>-->
+<!--                <div class="pagination text-center" v-if="viewData.length">-->
+<!--                            <btn-group class="ml-2">-->
+<!--                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>-->
+<!--                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                                </btn-group>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -178,6 +188,37 @@ export default {
             tableLoading: false,
             loadingData: false,
             URL: urls.semenCollection.addedit,
+            listURL: urls.semenCollection.listAnimal,
+            fields: [
+                {
+                    name: 'collection_date',
+                    title: 'Collection Date'
+                },
+                {
+                    name: 'bull.reg_no',
+                    title: 'Reg No'
+                },
+                {
+                    name: 'bull.bull_name',
+                    title: 'Bull Name'
+                },
+                {
+                    name: 'ejaculation_no',
+                    title: 'Ejaculation No'
+                },
+                {
+                    name: 'ptm',
+                    title: 'PTM'
+                },
+                {
+                    name: 'recorded_dose',
+                    title: 'Recorded Dose'
+                },
+                {
+                    name: '__slot:action',
+                    title: 'Action'
+                }
+            ],
             batchOptionURL: masterURLs.master.batch.vueSelect,
             dosetypeOptionURL: masterURLs.master.doseType.vueSelect,
             model: {
@@ -210,6 +251,21 @@ export default {
         await this.loadCollectionList();
     },
     computed: {
+        tableParams () {
+            let formattedDate = '';
+            if (this.model.collection_date) {
+                const parts = this.model.collection_date.split('-');
+                if (parts.length === 3) {
+                    formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                }
+            }
+            return {
+                semen_collection_id: this.model.id,
+                collection_date: formattedDate,
+                batch_id: this.model.batches,
+                reg_no: this.reg_no
+            };
+        },
         paginatedData () {
             const start = (this.currentPage - 1) * this.itemsPerPage;
             return this.viewData.slice(start, start + this.itemsPerPage);

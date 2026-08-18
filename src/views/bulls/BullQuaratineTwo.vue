@@ -136,37 +136,37 @@ export default {
             fields: [
                 {
                     name: 'bull.reg_no',
-                    sortField: 'bull',
+                    // sortField: 'bull',
                     title: 'Bull'
                 },
                 {
                     name: 'start_date',
-                    sortField: 'start_date',
+                    // sortField: 'start_date',
                     title: 'Start Date'
                 },
                 {
                     name: 'end_date',
-                    sortField: 'end_date',
+                    // sortField: 'end_date',
                     title: 'End Date'
                 },
                 {
                     name: 'addition_date',
-                    sortField: 'addition_date',
+                    // sortField: 'addition_date',
                     title: 'Addition Date'
                 },
                 {
                     name: 'bull.breed',
-                    sortField: 'breed',
+                    // sortField: 'breed',
                     title: 'Breed'
                 },
                 {
                     name: 'bull.shed',
-                    sortField: 'shed',
+                    // sortField: 'shed',
                     title: 'Shed'
                 },
                 {
                     name: 'bull.status',
-                    sortField: 'status',
+                    // sortField: 'status',
                     title: 'Status'
                 },
                 {

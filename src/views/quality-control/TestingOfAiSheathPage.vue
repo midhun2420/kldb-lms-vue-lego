@@ -50,54 +50,69 @@
         </div>
 
             </s-form>
-        <div class="column fl-x mt-4"  v-if="viewData.length">
-        <div class="col-lg-12 ">
-                    <div class="card pl-0 pr-0 pb-0 ml-lg-auto">
-<!--                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>-->
-                        <table style="width:100%" class="c-table-1" v-if="viewData.length">
-                            <thead>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Test Date</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Sample No</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Lot No</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Purchase Type</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Report</h5></th>
-                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Remarks</h5></th>
-                            </thead>
-                            <tbody class="">
-                            <tr v-for="(item, i) in paginatedData" :key="i">
-                                <td>{{ item.test_date }}</td>
-                                <td>{{ item.sample_no }}</td>
-                                <td>{{ item.lot_no }}</td>
-                                <td>{{ item.purchase_type }}</td>
-
-                                <td>
-                                  <a
-                                    :href="item.test_report"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    v-if="item.test_report"
-                                  >
-                                    {{ getFileName(item.test_report) }}
-                                  </a>
-                                  <span v-else>-</span>
-                                </td>
-                                <td>{{ item.remarks }}</td>
-
-                            </tr>
-                            </tbody>
-
-                        </table>
-                        <div class="pagination text-center" v-if="viewData.length">
-                            <btn-group class="ml-2">
-                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>
-                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>
-                                </btn-group>
-                        </div>
-
-                    </div>
-                </div>
+        <div class="mt-4">
+            <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Sample No">
+                <template slot="test_report" slot-scope="props">
+                    <a
+                        v-if="props.rowData.test_report"
+                        :href="props.rowData.test_report"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {{ getFileName(props.rowData.test_report) }}
+                    </a>
+                    <span v-else>-</span>
+                </template>
+            </vue-table>
         </div>
+<!--        <div class="column fl-x mt-4"  v-if="viewData.length">-->
+<!--        <div class="col-lg-12 ">-->
+<!--                    <div class="card pl-0 pr-0 pb-0 ml-lg-auto">-->
+<!--&lt;!&ndash;                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>&ndash;&gt;-->
+<!--                        <table style="width:100%" class="c-table-1" v-if="viewData.length">-->
+<!--                            <thead>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Test Date</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Sample No</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Lot No</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Purchase Type</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Report</h5></th>-->
+<!--                            <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Remarks</h5></th>-->
+<!--                            </thead>-->
+<!--                            <tbody class="">-->
+<!--                            <tr v-for="(item, i) in paginatedData" :key="i">-->
+<!--                                <td>{{ item.test_date }}</td>-->
+<!--                                <td>{{ item.sample_no }}</td>-->
+<!--                                <td>{{ item.lot_no }}</td>-->
+<!--                                <td>{{ item.purchase_type }}</td>-->
+
+<!--                                <td>-->
+<!--                                  <a-->
+<!--                                    :href="item.test_report"-->
+<!--                                    target="_blank"-->
+<!--                                    rel="noopener noreferrer"-->
+<!--                                    v-if="item.test_report"-->
+<!--                                  >-->
+<!--                                    {{ getFileName(item.test_report) }}-->
+<!--                                  </a>-->
+<!--                                  <span v-else>-</span>-->
+<!--                                </td>-->
+<!--                                <td>{{ item.remarks }}</td>-->
+
+<!--                            </tr>-->
+<!--                            </tbody>-->
+
+<!--                        </table>-->
+<!--                        <div class="pagination text-center" v-if="viewData.length">-->
+<!--                            <btn-group class="ml-2">-->
+<!--                              <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                              <span class="font-poppins-small fs-lg-0 text-primary">Page {{ currentPage }} of {{ totalPages }}</span>-->
+<!--                              <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
+<!--                                </btn-group>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -111,14 +126,42 @@ export default {
         return {
             loading: false,
             URL: urls.aisheath_test.addEdit,
+            listURL: urls.aisheath_test.list,
+            fields: [
+                {
+                    name: 'test_date',
+                    title: 'Test Date'
+                },
+                {
+                    name: 'sample_no',
+                    title: 'Sample No'
+                },
+                {
+                    name: 'lot_no',
+                    title: 'Lot No'
+                },
+                {
+                    name: 'purchase_type',
+                    title: 'Purchase Type'
+                },
+                {
+                    name: '__slot:test_report',
+                    title: 'Report'
+
+                },
+                {
+                    name: 'remarks',
+                    title: 'remarks'
+                }
+            ],
             sampleNoOption: [
                 { label: 'Large ', value: 'Large' },
                 { label: 'Medium ', value: 'Medium' },
                 { label: 'Small ', value: 'Small' }
             ],
             viewData: [],
-            currentPage: 1,
-            itemsPerPage: 10,
+            // currentPage: 1,
+            // itemsPerPage: 10,
             fileInputKey: 0,
             formKey: 0,
             model: {
@@ -146,18 +189,18 @@ export default {
             }
         };
     },
-    mounted () {
-        this.loadData();
-    },
-    computed: {
-        paginatedData () {
-            const start = (this.currentPage - 1) * this.itemsPerPage;
-            return this.viewData.slice(start, start + this.itemsPerPage);
-        },
-        totalPages () {
-            return Math.ceil(this.viewData.length / this.itemsPerPage);
-        }
-    },
+    // mounted () {
+    //     this.loadData();
+    // },
+    // computed: {
+    //     paginatedData () {
+    //         const start = (this.currentPage - 1) * this.itemsPerPage;
+    //         return this.viewData.slice(start, start + this.itemsPerPage);
+    //     },
+    //     totalPages () {
+    //         return Math.ceil(this.viewData.length / this.itemsPerPage);
+    //     }
+    // },
     methods: {
         validateFileSize (file) {
             const MAX_SIZE = 2 * 1024 * 1024; // 2 MB
@@ -173,26 +216,26 @@ export default {
         BackToHome () {
             this.$router.push({ path: '/quality-control/' });
         },
-        nextPage () {
-            if (this.currentPage < this.totalPages) {
-                this.currentPage++;
-            }
-        },
-        prevPage () {
-            if (this.currentPage > 1) {
-                this.currentPage--;
-            }
-        },
+        // nextPage () {
+        //     if (this.currentPage < this.totalPages) {
+        //         this.currentPage++;
+        //     }
+        // },
+        // prevPage () {
+        //     if (this.currentPage > 1) {
+        //         this.currentPage--;
+        //     }
+        // },
         getFileName (path) {
             if (!path) return '';
             return path.split('/').pop(); // Extracts the filename from a full path
         },
-        async loadData () {
-            this.viewData = [];
-            const response = await axios.get(urls.aisheath_test.list);
-            this.viewData = response.data.data;
-            console.log('response', this.data);
-        },
+        // async loadData () {
+        //     this.viewData = [];
+        //     const response = await axios.get(urls.aisheath_test.list);
+        //     this.viewData = response.data.data;
+        //     console.log('response', this.data);
+        // },
         disabledAfterToday (date) {
             const today = new Date();
             today.setHours(0, 0, 0, 0);

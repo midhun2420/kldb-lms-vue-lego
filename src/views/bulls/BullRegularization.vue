@@ -24,28 +24,30 @@
                         <h5 class="heading font-poppins-medium text-primary pb-3 bg-2 fl-x-cc mb-3">Due
                             for Regularization
                         </h5>
-                        <div class="col-12 mb-3" v-if="selectedBullsList.length !==0">
-                            <table style="width:100%">
-                                <th class="text-primary">Animal No</th>
-                                <th class="text-primary">Breed</th>
-                                <th class="text-primary">Age</th>
-                                <th class="text-primary">No of Collections</th>
-                                <th class="text-primary">No of good collection</th>
-<!--                                <th class="text-primary">Dam's Yield</th>-->
-                                <tr v-for="(item, i) in selectedBullsList" :key="i">
-                                    <td>{{ item.reg_no }}</td>
-                                    <td v-if="item.breed">{{ item.breed.breed_name }}</td>
-                                    <td v-else> ---</td>
-                                    <td>{{ item.age }}</td>
-<!--                                    <td>{{ item.damlacyield }}</td>-->
-                                    <td>{{ item.no_of_collections }}</td>
-                                    <td>{{ item.no_of_good_collections }}</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div v-else>
-                            No Data Found
-                        </div>
+                        <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Bull">
+                        </vue-table>
+<!--                        <div class="col-12 mb-3" v-if="selectedBullsList.length !==0">-->
+<!--                            <table style="width:100%">-->
+<!--                                <th class="text-primary">Animal No</th>-->
+<!--                                <th class="text-primary">Breed</th>-->
+<!--                                <th class="text-primary">Age</th>-->
+<!--                                <th class="text-primary">No of Collections</th>-->
+<!--                                <th class="text-primary">No of good collection</th>-->
+<!--&lt;!&ndash;                                <th class="text-primary">Dam's Yield</th>&ndash;&gt;-->
+<!--                                <tr v-for="(item, i) in selectedBullsList" :key="i">-->
+<!--                                    <td>{{ item.reg_no }}</td>-->
+<!--                                    <td v-if="item.breed">{{ item.breed.breed_name }}</td>-->
+<!--                                    <td v-else> -&#45;&#45;</td>-->
+<!--                                    <td>{{ item.age }}</td>-->
+<!--&lt;!&ndash;                                    <td>{{ item.damlacyield }}</td>&ndash;&gt;-->
+<!--                                    <td>{{ item.no_of_collections }}</td>-->
+<!--                                    <td>{{ item.no_of_good_collections }}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        <div v-else>-->
+<!--                            No Data Found-->
+<!--                        </div>-->
                     </div>
 
                 </modal>
@@ -135,6 +137,29 @@ export default {
             groupOption: [],
             loading: false,
             BullOptionURL: urls.regularization.selectedBulls,
+            listURL: urls.regularization.dueList,
+            fields: [
+                {
+                    name: 'reg_no',
+                    title: 'Animal No'
+                },
+                {
+                    name: 'breed.breed_name',
+                    title: 'Breed'
+                },
+                {
+                    name: 'age',
+                    title: 'Age'
+                },
+                {
+                    name: 'no_of_collections',
+                    title: 'No of Collections'
+                },
+                {
+                    name: 'no_of_good_collections',
+                    title: 'No of good Collection'
+                }
+            ],
             dob: '',
             model: {
                 animal_no: '',

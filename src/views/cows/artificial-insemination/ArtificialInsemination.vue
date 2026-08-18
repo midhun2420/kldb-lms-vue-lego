@@ -69,25 +69,27 @@
                 </div>
                 <div class="col-lg-4">
                     <h6 class="pl-8 text-primary fs-lg-1 font-poppins-medium">List of Active Mating Programs</h6>
-                        <table class="c-table-1 ml-5" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th class="text-primary">Date</th>
-                                <th class="text-primary">Cow</th>
-                                <th class="text-primary">Bull Allotted</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-if="!activeMating.length">
-                                <td colspan="3" class="text-center text-muted">No active mating records found</td>
-                            </tr>
-                            <tr v-for="(mating, index) in activeMating" :key="index" @click="selectMating(mating)" style="cursor: pointer">
-                                <td>{{ mating.mating_date }}</td>
-                                <td>{{ mating.cow.regno }}</td>
-                                <td>{{ mating.bull_allotted }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <vue-table class="ml-5" ref="table" :fields="fields" :url="activeMatingListURL" :per-page="10" search-placeholder="Cow" :extra-params="{ ai_date: model.ai_date }">
+                    </vue-table>
+<!--                    <table class="c-table-1 ml-5" style="width:100%">-->
+<!--                        <thead>-->
+<!--                            <tr>-->
+<!--                                <th class="text-primary">Date</th>-->
+<!--                                <th class="text-primary">Cow</th>-->
+<!--                                <th class="text-primary">Bull Allotted</th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <tr v-if="!activeMating.length">-->
+<!--                                <td colspan="3" class="text-center text-muted">No active mating records found</td>-->
+<!--                            </tr>-->
+<!--                            <tr v-for="(mating, index) in activeMating" :key="index" @click="selectMating(mating)" style="cursor: pointer">-->
+<!--                                <td>{{ mating.mating_date }}</td>-->
+<!--                                <td>{{ mating.cow.regno }}</td>-->
+<!--                                <td>{{ mating.bull_allotted }}</td>-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
                 </div>
                 <div class="col-lg-4">
                     <custom-single-column-table class="ml-lg-6">
@@ -135,6 +137,21 @@ export default {
             loading: false,
             cowOptionsURL: urls.cows.vueSelect,
             URL: urls.artificial_insemination.addEdit,
+            listURL: urls.artificial_insemination.activeMating,
+            fields: [
+                {
+                    name: 'mating_date',
+                    title: 'Date'
+                },
+                {
+                    name: 'cow.regno',
+                    title: 'Cow'
+                },
+                {
+                    name: 'bull_allotted',
+                    title: 'Bull allotted'
+                }
+            ],
             model: {
                 cow_type: '',
                 cow: '',
@@ -193,6 +210,15 @@ export default {
     mounted () {
         this.loadCowRegnoOptions();
         // this.loadMatingDetails();
+    },
+    computed: {
+        activeMatingListURL () {
+            if (!this.model.ai_date) {
+                return this.listURL;
+            }
+
+            return this.listURL + '?ai_date=' + this.model.ai_date;
+        }
     },
     // watch: {
     //     'model.ai_date' (newValue) {

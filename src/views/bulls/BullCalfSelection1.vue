@@ -74,40 +74,53 @@
 <!--                    </div>-->
                     <div class="row">
                         <div class="col-12">
-                            <div class="card pl-0 pr-0 pt-0 pb-0 of-h">
-                                <div class="heading font-poppins-medium text-primary pt-2  bg-2 fl-x-cc fs-lg-0 mb-3">Bull Calf Selection Details
+                            <div class="card pl-0 pr-0 pt-0 pb-0 of-h mt-3">
+                                <div class="heading font-poppins-medium text-primary pt-2  bg-2 fl-x-cc fs-lg-0 mt-2">Bull Calf Selection Details
                                 </div>
+                                <vue-table ref="table" :fields="fields" :url="listURL" :per-page="10" search-placeholder="Bull">
+                                    <template slot="file" slot-scope="props">
+                                            <a
+                                                v-if="props.rowData.file"
+                                                :href="props.rowData.file"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                {{ getFileName(props.rowData.file) }}
+                                            </a>
+                                            <span v-else>-</span>
+                                    </template>
+                                </vue-table>
         <!--                        <div class="heading font-poppins-medium text-primary pt-3 mb-2 bg-2 fl-x-cc fs-lg&#45;&#45;1">Milk Disposal</div>-->
-                                <table style="width:100%" class="c-table-1 mt-2" v-if="viewData.length">
-                                    <thead>
-                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Selection Date</h5></th>
-                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Animal No</h5></th>
-<!--                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Quarantine Month</h5></th>-->
-                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Status</h5></th>
-                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Uploaded File</h5></th>
-                                    </thead>
-                                    <tbody class="">
-                                    <tr v-for="(item, i) in viewData" :key="i">
-                                        <td>{{ item.selection_date }}</td>
-                                        <td>{{ item.animal.reg_no }}</td>
-<!--                                        <td>{{ item.quarantine_month }}</td>-->
-                                        <td>{{ item.status }}</td>
-                                        <td>
-                                          <a
-                                            :href="item.file"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            v-if="item.file"
-                                          >
-                                            {{ getFileName(item.file) }}
-                                          </a>
-                                          <span v-else>-</span>
-                                        </td>
+<!--                                <table style="width:100%" class="c-table-1 mt-2" v-if="viewData.length">-->
+<!--                                    <thead>-->
+<!--                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Selection Date</h5></th>-->
+<!--                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Animal No</h5></th>-->
+<!--&lt;!&ndash;                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Quarantine Month</h5></th>&ndash;&gt;-->
+<!--                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Status</h5></th>-->
+<!--                                    <th class=""><h5 class=" w-100p bg-2  mb-0 text-left font-poppins-medium fs-lg-0 text-primary fl-y-tc">Uploaded File</h5></th>-->
+<!--                                    </thead>-->
+<!--                                    <tbody class="">-->
+<!--                                    <tr v-for="(item, i) in viewData" :key="i">-->
+<!--                                        <td>{{ item.selection_date }}</td>-->
+<!--                                        <td>{{ item.animal.reg_no }}</td>-->
+<!--&lt;!&ndash;                                        <td>{{ item.quarantine_month }}</td>&ndash;&gt;-->
+<!--                                        <td>{{ item.status }}</td>-->
+<!--                                        <td>-->
+<!--                                          <a-->
+<!--                                            :href="item.file"-->
+<!--                                            target="_blank"-->
+<!--                                            rel="noopener noreferrer"-->
+<!--                                            v-if="item.file"-->
+<!--                                          >-->
+<!--                                            {{ getFileName(item.file) }}-->
+<!--                                          </a>-->
+<!--                                          <span v-else>-</span>-->
+<!--                                        </td>-->
 
-                                    </tr>
-                                    </tbody>
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
 
-                                </table>
+<!--                                </table>-->
 <!--                                <div class="pagination text-center" v-if="viewData.length">-->
 <!--                                    <btn-group class="ml-2">-->
 <!--                                      <btn class="mr-2" v-if="currentPage > 1" @click="prevPage"><img src="../../assets/web/icons/icon-left-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
@@ -115,22 +128,22 @@
 <!--                                      <btn class="ml-2" v-if="currentPage < totalPages" @click="nextPage"><img src="../../assets/web/icons/icon-right-arrow.png" style="width: 16px; height: 16px;" alt="<-" /></btn>-->
 <!--                                        </btn-group>-->
 <!--                                </div>-->
-                                <div class="pagination text-center" v-if="viewData.length" style="font-size: 20px;">
-                                  <!-- Previous -->
-                                  <span v-if="currentPage > 1" @click="prevPage" style="color: primary; cursor: pointer; margin-right: 10px;">
-                                    &lt;
-                                  </span>
+<!--                                <div class="pagination text-center" v-if="viewData.length" style="font-size: 20px;">-->
+<!--                                  &lt;!&ndash; Previous &ndash;&gt;-->
+<!--                                  <span v-if="currentPage > 1" @click="prevPage" style="color: primary; cursor: pointer; margin-right: 10px;">-->
+<!--                                    &lt;-->
+<!--                                  </span>-->
 
-                                  <!-- Current page info -->
-                                  <span class="font-poppins-small fs-lg-0 text-primary">
-                                    Page {{ currentPage }} of {{ totalPages }}
-                                  </span>
+<!--                                  &lt;!&ndash; Current page info &ndash;&gt;-->
+<!--                                  <span class="font-poppins-small fs-lg-0 text-primary">-->
+<!--                                    Page {{ currentPage }} of {{ totalPages }}-->
+<!--                                  </span>-->
 
-                                  <!-- Next -->
-                                  <span v-if="currentPage < totalPages" @click="nextPage" style="color: primary; cursor: pointer; margin-left: 10px;">
-                                    &gt;
-                                  </span>
-                                </div>
+<!--                                  &lt;!&ndash; Next &ndash;&gt;-->
+<!--                                  <span v-if="currentPage < totalPages" @click="nextPage" style="color: primary; cursor: pointer; margin-left: 10px;">-->
+<!--                                    &gt;-->
+<!--                                  </span>-->
+<!--                                </div>-->
 
                             </div>
                         </div>
@@ -192,6 +205,25 @@ export default {
             loading: false,
             loading1: false,
             BullOptionURL: urls.calfSelection.selectedBullsList,
+            listURL: urls.calfSelection.list,
+            fields: [
+                {
+                    name: 'selection_date',
+                    title: 'Selection Date'
+                },
+                {
+                    name: 'animal.reg_no',
+                    title: 'Animal No'
+                },
+                {
+                    name: 'animal.status',
+                    title: 'Status'
+                },
+                {
+                    name: '__slot:file',
+                    title: 'Uploaded File'
+                }
+            ],
             QuarantineOptionURL: urls.quarantine.vueSelect,
             statusOptionURL: [
                 { label: 'Selected', value: 'Selected' },
@@ -315,7 +347,8 @@ export default {
             try {
                 const response = await axios.get(urls.calfSelection.list + `?page=${page}`);
                 const res = response.data;
-                this.viewData = res.data; // current page data
+                this.viewData = res.data;
+                await this.$refs.table.refreshTable();
                 this.currentPage = res.current_page;
                 this.totalPages = res.last_page;
                 this.perPage = res.per_page;
@@ -403,6 +436,7 @@ export default {
                     this.loading1 = false;
                     await this.clearDataModel1();
                     await this.loadQurantineBullOptions();
+                    this.$refs.table.refresh();
                     await this.loadData();
                 } else {
                     const errors = response.data.errors;
