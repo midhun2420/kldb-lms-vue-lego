@@ -261,9 +261,9 @@
         <div class="bb-1 pt-3"></div>
         <div class="mt-4">
             <div class="row">
-                <div class="col-lg-2">
-                    <validated-input label="UID Number" v-model="model.uid_no"></validated-input>
-                </div>
+<!--                <div class="col-lg-2">-->
+<!--                    <validated-input label="UID Number" v-model="model.uid_no"></validated-input>-->
+<!--                </div>-->
                 <div class="col-lg-2">
                     <validated-date-picker label="Addition Date Semen Station" class="c-input-select" format="DD-MM-YYYY"
                                    v-model="model.addition_date" :disabled-date="disableAdditionDate"></validated-date-picker>
