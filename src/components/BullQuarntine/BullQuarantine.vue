@@ -136,7 +136,12 @@ export default {
                 remarks: '',
                 uid_no: '',
                 addition_date: '',
-                training_date: ''
+                training_date: '',
+                brachyspina: '',
+                cvm: '',
+                hh3: '',
+                hh1: '',
+                jh1: ''
             },
             details: {
                 breed: '',
@@ -246,6 +251,11 @@ export default {
             this.model.uid_no = '';
             this.model.addition_date = '';
             this.model.training_date = '';
+            this.model.brachyspina = '';
+            this.model.cvm = '';
+            this.model.hh3 = '';
+            this.model.hh1 = '';
+            this.model.jh1 = '';
 
             this.details.breed = '';
             this.details.sire_no = '';

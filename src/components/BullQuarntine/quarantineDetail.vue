@@ -82,6 +82,21 @@
               <div class="col-lg-3">
                   <validated-input label="FactorXI" v-model="detailItem.factor_x1" class="mr-4 text-black" :disabled="true"></validated-input>
               </div>
+              <div class="col-lg-3">
+                  <validated-input label="Brachyspina" v-model="detailItem.brachyspina" class="mr-4 text-black" :disabled="true"></validated-input>
+              </div>
+              <div class="col-lg-3">
+                  <validated-input label="CVM" v-model="detailItem.cvm" class="mr-4 text-black" :disabled="true"></validated-input>
+              </div>
+              <div class="col-lg-3">
+                  <validated-input label="HH3" v-model="detailItem.hh3" class="mr-4 text-black" :disabled="true"></validated-input>
+              </div>
+              <div class="col-lg-3">
+                  <validated-input label="HH1" v-model="detailItem.hh1" class="mr-4 text-black" :disabled="true"></validated-input>
+              </div>
+              <div class="col-lg-3">
+                  <validated-input label="JH1" v-model="detailItem.jh1" class="mr-4 text-black" :disabled="true"></validated-input>
+              </div>
 
               <div class="col-lg-3">
 <!--                <label class="mr-2 font-poppins-semibold" style="min-width:120px;">BLAD:</label>-->

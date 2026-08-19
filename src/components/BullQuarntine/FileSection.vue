@@ -195,6 +195,37 @@
                                                   class="c-input-select"></validated-vue-select>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <validated-vue-select placeholder="BRACHYSPINA" :options="geneticDisease"
+                                                  v-model="model.brachyspina"
+                                                  class="c-input-select"></validated-vue-select>
+                        </div>
+                        <div class="col-lg-5">
+                            <validated-vue-select placeholder="CVM" :options="geneticDisease"
+                                                  v-model="model.cvm"
+                                                  class="c-input-select"></validated-vue-select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <validated-vue-select placeholder="HH1" :options="geneticDisease"
+                                                  v-model="model.hh1"
+                                                  class="c-input-select"></validated-vue-select>
+                        </div>
+                        <div class="col-lg-5">
+                            <validated-vue-select placeholder="HH3" :options="geneticDisease"
+                                                  v-model="model.hh3"
+                                                  class="c-input-select"></validated-vue-select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <validated-vue-select placeholder="JH1" :options="geneticDisease"
+                                                  v-model="model.jh1"
+                                                  class="c-input-select"></validated-vue-select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
