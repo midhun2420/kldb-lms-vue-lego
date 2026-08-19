@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-lg-2">
                     <validated-select :options="YesOrNoOptions"
-                                      class="c-input-select field-required" label="F1 calf or not" :rules="{required:true}" v-model="model.f1status"></validated-select>
+                                      class="c-input-select" label="F1 calf or not" v-model="model.f1status"></validated-select>
                 </div>
             </div>
             <div class="row">

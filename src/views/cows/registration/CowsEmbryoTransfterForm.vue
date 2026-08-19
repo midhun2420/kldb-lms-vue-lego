@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-2">
-                    <validated-select class="c-input-select field-required" label="F1 calf or not" :options="YesOrNoOptions" v-model="model.f1status" :rules="{required:true}"></validated-select>
+                    <validated-select class="c-input-select" label="F1 calf or not" :options="YesOrNoOptions" v-model="model.f1status"></validated-select>
                 </div>
                 <div class="col-lg-2">
                     <validated-input label="ET Date" v-model="detailItem.date_of_transfer" :rules="rules.ETDate"  format="DD-MM-YYYY" :disabled="true"></validated-input>
