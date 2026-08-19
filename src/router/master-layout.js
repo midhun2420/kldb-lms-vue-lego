@@ -147,6 +147,11 @@ export default {
             component: () => import('../views/MasterData/ReasonForCulling/reasonForCulling')
         },
         {
+            path: '/master-data/stock-position/',
+            name: 'EmbryoStockPosition',
+            component: () => import('../views/MasterData/EmbryoStockPosition/EmbryoStockPosition')
+        },
+        {
             path: '/master-data/mode-of-disposal/',
             name: 'modeOfDisposal',
             component: () => import('../views/MasterData/ModeOfDisposal/modeOfDisposal')

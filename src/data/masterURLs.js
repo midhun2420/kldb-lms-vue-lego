@@ -227,6 +227,13 @@ export default {
             vueSelect: baseUrl + 'reason-for-disposal-vue-select/',
             details: baseUrl + 'reason-for-disposal-detail/'
         },
+        embryoStockPosition: {
+            list: baseUrl + 'stock-position-list/',
+            addEdit: baseUrl + 'stock-position-add-edit/',
+            delete: baseUrl + 'stock-position-delete/',
+            vueSelect: baseUrl + 'stock-position-vue-select/',
+            details: baseUrl + 'stock-position-detail/'
+        },
         unit: {
             list: baseUrl + 'unit-list/',
             addEdit: baseUrl + 'unit-add-edit/',

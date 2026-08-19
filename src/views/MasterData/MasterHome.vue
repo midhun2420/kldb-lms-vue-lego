@@ -99,6 +99,9 @@
             <div class="col-lg-3 mt-lg-3" @click="redirect('RejectedReason')">
                 <dashboard-card-item text="Rejected Reason"></dashboard-card-item>
             </div>
+            <div class="col-lg-3 mt-lg-3" @click="redirect('EmbryoStockPosition')">
+                <dashboard-card-item text="Embryo Stock Position"></dashboard-card-item>
+            </div>
             <div v-if="currentUser.admin === true" class="col-lg-3 mt-lg-3" @click="redirect('UserManagement')">
                 <dashboard-card-item text="User Management"></dashboard-card-item>
             </div>
@@ -160,7 +163,8 @@ export default {
                 Unit: '/master-data/unit/',
                 Crop: '/master-data/crop/',
                 BookValue: '/master-data/book-value/',
-                RejectedReason: '/master-data/rejected-reason/'
+                RejectedReason: '/master-data/rejected-reason/',
+                EmbryoStockPosition: '/master-data/stock-position/'
 
             }
         };
@@ -262,6 +266,9 @@ export default {
             }
             if (URLName === 'RejectedReason') {
                 this.$router.push({ path: this.urls.RejectedReason });
+            }
+            if (URLName === 'EmbryoStockPosition') {
+                this.$router.push({ path: this.urls.EmbryoStockPosition });
             }
             if (URLName === 'UserManagement') {
                 this.$router.push({ path: this.urls.UserManagement });
