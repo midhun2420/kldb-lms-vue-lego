@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.e1b4aaafd0147189ef8565a9112773d0.js"
+  "/precache-manifest.ba0b9ab888182b102a6ab02141fbc246.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "kldb-bulls-portal"});
