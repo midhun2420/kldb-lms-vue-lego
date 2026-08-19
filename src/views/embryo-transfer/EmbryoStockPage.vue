@@ -70,7 +70,14 @@
                 <validated-input class="text-black" label="Embryo Grade" v-model="model.embryo_grade"></validated-input>
             </div>
             <div class="col-lg-2">
-                <validated-input class="text-black" label="Embryo Location" v-model="model.embryo_location"></validated-input>
+                <validated-input class="text-black" label="Container No" v-model="model.container_no"></validated-input>
+            </div>
+            <div class="col-lg-2">
+                <validated-ajax-vue-select
+                    class="text-black" label="Position" v-model="model.position" :url="positionOptionsURL"></validated-ajax-vue-select>
+            </div>
+            <div class="col-lg-2">
+                <validated-date-picker format="DD-MM-YYYY"  class="c-input-datepicker text-black" label="Date of Transfer" v-model="model.production_date"></validated-date-picker>
             </div>
         </div>
         <div class="row mt-lg-4">
@@ -98,6 +105,7 @@ export default {
         return {
             embriyoBreedOptionURL: masterURLs.master.breed.vueSelect,
             breedOptionsURL: masterURLs.master.breed.vueSelect,
+            positionOptionsURL: masterURLs.master.embryoStockPosition.vueSelect,
             cowOptionURL: urls.cows.vueSelect + '?no_cow_type=Young Female',
             bullOptionURL: urls.bulls.vueSelect + '?status=Regularized',
             URL: urls.embryoStock.addEdit,
@@ -127,7 +135,9 @@ export default {
                 sire_breed: '',
                 sire_yield: '',
                 embryo_grade: '',
-                embryo_location: ''
+                container_no: '',
+                position: '',
+                production_date: ''
 
             }
         };
@@ -212,8 +222,14 @@ export default {
                 if (this.model.embryo_grade === undefined || this.model.embryo_grade === null) {
                     this.model.embryo_grade = '';
                 }
-                if (this.model.embryo_location === undefined || this.model.embryo_location === null) {
-                    this.model.embryo_location = '';
+                if (this.model.container_no === undefined || this.model.container_no === null) {
+                    this.model.container_no = '';
+                }
+                if (this.model.position === undefined || this.model.position === null) {
+                    this.model.position = '';
+                }
+                if (this.model.production_date === undefined || this.model.production_date === null) {
+                    this.model.production_date = '';
                 }
                 console.log(this.URL);
                 console.log(this.model);
@@ -238,7 +254,9 @@ export default {
                         sire_breed: '',
                         sire_yield: '',
                         embryo_grade: '',
-                        embryo_location: ''
+                        container_no: '',
+                        position: '',
+                        production_date: ''
                     };
                     this.formKey++;
                 } else {
